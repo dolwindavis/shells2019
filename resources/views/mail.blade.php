@@ -105,7 +105,16 @@ May the best team win....#GameON
                     <td align="center" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; padding-top: 0;">
 
                         <p style="color: #b7bdc9; font-size: 16px; line-height: 24px; margin: 0;">
-                         Department of Computer Science(PG)  of Kristu Jayanti College Presents SHELLS 2K19 National Level IT Fest.
+                        Greetings {{$name}}    .This mail consists of the user id that has been assigned to your college for participating in Shells 2K19.
+
+                            <b>Note </b>
+                            *This ID should be used to login to various aptitude rounds of various events.<br>
+                            *This is going to be your individual team ID that is assigned to your college  with which all the participants belonging to the same college can check their progress or status in various events.
+
+                            <b>USER ID: {{ $username}} </b>
+
+                            <br>
+                            May the best team win....#GameON
                         </p>
 
                     </td>

@@ -30,6 +30,14 @@ class ViewController extends Controller
         return view('studentlist');
     }
 
+    public function eventsView(Request $request)
+    {
+        $events = Events::all();
+        return view('eventview',compact('events'));
+
+
+    }
+
     function studentAddView() {
 
         $student =new Student();
