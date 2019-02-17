@@ -34,6 +34,9 @@
         </li>
         @else
         <li class="nav-item">
+          <a class="nav-link" href="{{ url('/register') }}">Register</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link disabled" href="{{ url('login') }}"><i class="fas fa-sign-in-alt" style="font-size: 20px;"></i></a>
         </li>
         @endif
