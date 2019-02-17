@@ -55,7 +55,7 @@ class RegisterController extends Controller
         }
 
         //sending mail to the user
-        // $this->sendMail($newuser);
+        $this->sendMail($newuser);
 
 
         return redirect('home');
@@ -188,7 +188,8 @@ class RegisterController extends Controller
     {
         $mail=$newuser->email;
         $username=$newuser->username;
-        Mail::to($mail)->send(new RegisterMail($username));
+        $name=$newuser->name;
+        Mail::to($mail)->send(new RegisterMail($username,$name));
         
     }
 }

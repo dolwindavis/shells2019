@@ -69,8 +69,10 @@
     
     <div class="col-md m-2 p-2 card-1 border-r-sm bg-st-li">
       <div class="text-center p-5">
-        <i class="fas fa-plus-circle" style="font-size: 50px;"></i><br>
-        <h2>Add</h2>
+        <a href="{{ url('student/register')}}">
+          <i class="fas fa-plus-circle" style="font-size: 50px;"></i><br>
+          <h2>Add</h2>
+        </a>
       </div>
     </div>
 

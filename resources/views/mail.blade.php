@@ -54,15 +54,15 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
 
 <!-- HIDDEN PREHEADER TEXT -->
 <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Open Sans, Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
-Greetings (College Name)    .This mail consists of the user id that has been assigned to your college for participating in Shells 2K19.
+Greetings {{$name}}    .This mail consists of the user id that has been assigned to your college for participating in Shells 2K19.
 
-<b>Note<\b>
-*This ID should be used to login to various aptitude rounds of various events.
- *This is going to be your individual team ID that is assigned to your college  with which all the participants belonging to the same college can check their progress or status in various events.
+<b>Note </b>
+*This ID should be used to login to various aptitude rounds of various events.<br>
+*This is going to be your individual team ID that is assigned to your college  with which all the participants belonging to the same college can check their progress or status in various events.
 
-<b>USER ID: {{username}} </b>
+<b>USER ID: {{ $username}} </b>
 
-
+<br>
 May the best team win....#GameON
 </div>
 
@@ -115,7 +115,7 @@ May the best team win....#GameON
                         <table border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td align="center" style="border-radius: 28px;" bgcolor="#2b388f">
-                                    <a href="http://litmus.com" target="_blank" style="font-size: 15px;letter-spacing: 1.5px; font-family: Open Sans, Helvetica, Arial, sans-serif; font-weight: 900; color: #1b75bb; text-decoration: none; border-radius: 28px; background-color: #FFF; padding: 13px 25px; border: 1px solid #FFF; display: block;"> VISIT</a>
+                                    <a href="http://shells.kristujayanti.com" target="_blank" style="font-size: 15px;letter-spacing: 1.5px; font-family: Open Sans, Helvetica, Arial, sans-serif; font-weight: 900; color: #1b75bb; text-decoration: none; border-radius: 28px; background-color: #FFF; padding: 13px 25px; border: 1px solid #FFF; display: block;"> VISIT</a>
                                 </td>
                             </tr>
                         </table>
