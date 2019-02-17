@@ -28,6 +28,7 @@ class RegisterController extends Controller
 
         $validated = $request->validated();
 
+
         //beginning a Database transaction
         DB::beginTransaction();
 
@@ -49,12 +50,12 @@ class RegisterController extends Controller
 
             //rollback the transactions if any error occur
             DB::rollBack();
-            return redirect()->route('register');;
+            return redirect()->route('register');
 
         }
 
         //sending mail to the user
-        $this->sendMail($newuser);
+        // $this->sendMail($newuser);
 
 
         return redirect('home');

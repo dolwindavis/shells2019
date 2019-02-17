@@ -26,7 +26,7 @@ class College extends Model
 
         $this->name = $request->name;
 
-        $this->phone_no = $request->phone;
+        $this->phone_no = $request->phoneno;
 
         if($request->stay == null){
 
@@ -41,7 +41,7 @@ class College extends Model
 
         //$this->faculty = $request->faculty;
 
-        $this->faculty = "Heloooo";
+        // $this->faculty = "Heloooo";
 
         $user->college()->save($this);
     }

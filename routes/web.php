@@ -25,6 +25,12 @@ Route::get('/login', 'ViewController@loginView');
 
 Route::get('/register','ViewController@registerView');
 
+Route::get('/events',function ()
+{
+    return view('eventview');
+
+});
+
 //Controller => RegisterController
 //Registering a college 
 

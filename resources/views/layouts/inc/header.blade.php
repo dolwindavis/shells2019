@@ -24,11 +24,11 @@
         @if(Auth::User())
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown 
+            {{{Auth::User()->username}}} 
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{{ url('student') }}">Registration</a>
-            <a class="dropdown-item" href="{{ url('events/register') }}">Event Registration</a>
+           <!-- <a class="dropdown-item" href="{{ url('events/register') }}">Event Registration</a> -->
             <a class="dropdown-item" href="{{ url('logout') }}" >Logout</a>
           </div>
         </li>

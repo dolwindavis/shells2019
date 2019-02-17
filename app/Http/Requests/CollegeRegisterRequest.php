@@ -27,7 +27,7 @@ class CollegeRegisterRequest extends FormRequest
 
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|digits:10|',
+            'phoneno' => 'required|digits:10',
             'password' => 'required|string|gte:8',
             //'confirm' => 'required|same:password',
             //'stay' => 'required'
