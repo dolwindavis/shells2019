@@ -45,7 +45,8 @@
   
           <div class="row">
           <h4>Rules:</h4><br>
-           {{ !! $event->rules !!}}
+
+          {!!html_entity_decode($event->rules)!!}
           </div>
           </div>
         <!-- event head name pic and number -->
