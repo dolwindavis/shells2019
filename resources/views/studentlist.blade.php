@@ -2,7 +2,31 @@
 @section('title','SHELLS2k19 | STUDENTLIST')
 
 @section('content')
-
+@if (session('success'))
+  <script>
+  Swal.fire(
+  'New Student Added!',
+  '#Game On!',
+  'success'
+)
+</script>
+@elseif(session('update'))
+<script>
+  Swal.fire(
+  'Updated Succesfully !',
+  '#Game On!',
+  'success'
+)
+</script>
+@elseif(session('delete'))
+<script>
+  Swal.fire(
+  'Deleted Succesfully !',
+  '#Game On!',
+  'success'
+)
+</script>
+@endif
 <div class="container-fluid mb-5 " style="margin-top: 100px; ">
   <h3 class="p-5">Student's Registered</h3>
   <div class="container " style="box-sizing: border-box; ">

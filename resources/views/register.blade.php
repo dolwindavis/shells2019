@@ -43,7 +43,7 @@
     <div class="form-check">
         <label class="form-check-label">
             <input class="form-check-input" type="checkbox" value="1" name="stay">
-            stay?
+            Do You Require Stay?
             <span class="form-check-sign">
                 <span class="check"></span>
             </span>

@@ -54,12 +54,14 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
 
 <!-- HIDDEN PREHEADER TEXT -->
 <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Open Sans, Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
-Greetings {{$name}}    .This mail consists of the user id that has been assigned to your college for participating in Shells 2K19.
-
+Greetings {{$name}},<br>This mail consists of the user id that has been assigned to your college for participating in Shells 2K19.
+<br>
 <b>Note </b>
-*This ID should be used to login to various aptitude rounds of various events.<br>
-*This is going to be your individual team ID that is assigned to your college  with which all the participants belonging to the same college can check their progress or status in various events.
-
+<br>
+#This ID should be used to login to various aptitude rounds of various events.
+<br>
+#This is going to be your individual team ID that is assigned to your college  with which all the participants belonging to the same college can check their progress or status in various events.
+<br>
 <b>USER ID: {{ $username}} </b>
 
 <br>

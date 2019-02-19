@@ -55,8 +55,9 @@ class RegisterController extends Controller
         }
 
         //sending mail to the user
-        $this->sendMail($newuser);
+        $this->sendMail($newuser,$newcollege);
 
+        session()->flash('message','Success');
 
         return redirect('home');
         
@@ -89,6 +90,8 @@ class RegisterController extends Controller
 
         }
 
+        session()->flash('success','Success');
+
         return redirect('/student');
 
     }
@@ -104,6 +107,7 @@ class RegisterController extends Controller
 
         $student->updateStudent($request);
 
+        session()->flash('update','Success');
         return redirect('/student');
     }
 
@@ -120,7 +124,7 @@ class RegisterController extends Controller
             return redirect('/student');
 
         }
-
+        session()->flash('delete','Success');
         return redirect('/student');
     }
     
@@ -184,11 +188,11 @@ class RegisterController extends Controller
     }
 
 
-    function sendMail($newuser)
+    function sendMail($newuser,$newcollege)
     {
         $mail=$newuser->email;
         $username=$newuser->username;
-        $name=$newuser->name;
+        $name=$newcollege->name;
         Mail::to($mail)->send(new RegisterMail($username,$name));
         
     }
