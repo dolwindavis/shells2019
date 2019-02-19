@@ -126,7 +126,7 @@ May the best team win....#GameON
                         <table border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td align="center" style="border-radius: 28px;" bgcolor="#2b388f">
-                                    <a href="http://shells.kristujayanti.com" target="_blank" style="font-size: 15px;letter-spacing: 1.5px; font-family: Open Sans, Helvetica, Arial, sans-serif; font-weight: 900; color: #1b75bb; text-decoration: none; border-radius: 28px; background-color: #FFF; padding: 13px 25px; border: 1px solid #FFF; display: block;"> VISIT</a>
+                                    <a href="http://shells.kristujayanti.edu.in" target="_blank" style="font-size: 15px;letter-spacing: 1.5px; font-family: Open Sans, Helvetica, Arial, sans-serif; font-weight: 900; color: #1b75bb; text-decoration: none; border-radius: 28px; background-color: #FFF; padding: 13px 25px; border: 1px solid #FFF; display: block;"> VISIT</a>
                                 </td>
                             </tr>
                         </table>
