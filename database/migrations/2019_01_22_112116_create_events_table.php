@@ -22,7 +22,7 @@ class CreateEventsTable extends Migration
             $table->string('head_phone');
             $table->string('head_mail');
             $table->string('info');
-            $table->string('rules');
+            $table->string('rules',200);
             $table->integer('groupevent');
             $table->integer('groupnumber');
             $table->integer('maxnumber');
