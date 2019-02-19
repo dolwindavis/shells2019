@@ -6,9 +6,9 @@
 @section('content')
 
 <div class="container-fluid" style="padding: 0px;">
-  <div style=" height:400px; width: 100%; background-color: #03a9f4; object-fit: cover; object-position: center;" >
-    <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/signin/bg2.jpg" width="100%" height="100%" style="object-fit: cover;">
-  </div>
+  <!-- <div style=" height:400px; width: 100%;  object-fit: cover; object-position: center;" > -->
+    <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/bg.jpg" width="100%" height="100%" style="object-fit: cover;">
+  <!-- </div> -->
 </div>
 <div class="container text-center card-3 border-r-sm" id="card-sign-in">
   <div class="row text-center p-3" >

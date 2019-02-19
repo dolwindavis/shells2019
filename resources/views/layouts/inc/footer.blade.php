@@ -34,8 +34,8 @@
     
   </div>
   <!-- footer end -->
-  <div class="container-fluid text-center bg-light ">
+  <!-- <div class="container-fluid text-center bg-light ">
     
        <p class="p-3 m-0"> @copyrights 2019 kristu jayanti college</p>
     
-  </div>
+  </div> -->

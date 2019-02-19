@@ -16,10 +16,10 @@
         <img class="d-block w-100"  src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/home/slide1.jpg
   " alt="First slide">
       </div>
-      <div class="carousel-item">
+      <!-- <div class="carousel-item">
         <img class="d-block w-100" src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/home/slide3.jpg
   " alt="Second slide">
-      </div>
+      </div> -->
      
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -53,7 +53,7 @@
   
     <div class="row ">
     <div class="col-md-6" style="padding-left: 0;">
-      <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/slider-1.jpg" style="width: 100%;height: 100%; object-fit: cover; object-position: left;" >
+      <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/home/slide3.jpg" style="width: 100%;height: 100%; object-fit: cover; object-position: left;" >
     </div>
     <div class="col-md p-5  sl-left  text-dark mv-top box">
       <h2 class="text-left border-bottom border-primary"><b style="font-weight: 400;">About</b> College</h2>
@@ -71,7 +71,7 @@
     <div class="row border-r-sm">
       
     <div class="col-md-6 " style="padding-left:  0;">
-      <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/slider-1.jpg" class="border-r-sm" style="width: 100%;height: 100%; object-fit: cover; object-position: right;" >
+      <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/home/dept.JPG" class="border-r-sm" style="width: 100%;height: 100%; object-fit: cover; object-position: right;" >
     </div>
     <div class="col-md-6 p-5  sl-left-2  text-dark mv-top box">
       <h2 class="text-left border-bottom border-primary"><b style="font-weight: 400;">About</b>  Department</h2>

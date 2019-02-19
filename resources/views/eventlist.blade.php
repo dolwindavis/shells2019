@@ -77,20 +77,30 @@ button.btn
       <div class="row text-center text-light" id="addcol" style="box-sizing: border-box;">
 
             {{-- card design start --}}
-
-            <!-- <div class="col-md-3 m-2 card-1 border-r-sm" style="min-width:300px;min-height:450px;">
+        @foreach($results as $result)
+            <div class="col-md-3 m-2 card-1 border-r-sm" style="min-width:300px;min-height:450px;">
                 <div class="row" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);">
                     <div class="bg-dark text-light pt-5" style="position: relative;top: 40px;width: 50%;margin: 10px auto;border-radius: 5px;">
-                        <img src="'+results.logo+'" height="100px" id="logo"  width="100px">
+                        <img src="{{$result->eventlogo}}" height="100px" id="logo"  width="100px">
                             <h5 class="pt-2" >
-                                <strong id="eventname">'+results.name+'</strong>
+                                <strong id="eventname">{{ $result->eventname }}</strong>
                             </h5>
-                            <p>'+results.info+'</p>
+                            <p>{{$result->eventinfo }}</p>
                     </div>
                 </div>
             <form id="form1">
             @csrf
-            <div class="row" style="margin-top: 50px;" id="student_no"> '+select_tag+' </div>
+            <div class="row" style="margin-top: 50px;" id="student_no">
+            @foreach($result->students as $student)
+                <div class="selectdiv">
+                    <label>
+                        <select id="{{ 'selectbox'.$result->eventid }}" disabled>
+                            <option value="{{$student->id}}"> {{ $student->name }}</option>
+                        </select>
+                    </label>
+                </div>
+            @endforeach
+            </div>
             </form>
             <div class="row" >
             <div class="col" style="padding-left: 0;padding-right: 0;">
@@ -104,7 +114,8 @@ button.btn
             </i> Save</button>
         </div>
         </div>
-        </div> -->
+        </div> 
+    @endforeach
  {{-- card design end --}}
     {{-- card design start --}}
 
