@@ -4,6 +4,16 @@
 
 
 @section('content')
+
+@if (session('failed'))
+  <script>
+  Swal.fire(
+  'Check Your Details!',
+  'Try Again!',
+  'error'
+)
+  </script>
+@endif
 <div class="container-fluid" style="padding: 0px;">
     <div style=" height:400px; width: 100%; " >
     <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/bg.jpg" style="object-fit: cover; object-position: bottom;" height="100%" width="100%">
