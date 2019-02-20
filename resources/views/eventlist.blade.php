@@ -180,7 +180,9 @@ button.btn
         $(document).ready(function(){
         $('#addcol').append('<div class="col-md-3 m-2 card-1 border-r-sm" style="min-width:300px;min-height:450px;"><div class="row" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);"><div class="bg-dark text-light pt-5" style="position: relative;top: 40px;width: 50%;margin: 10px auto;border-radius: 5px;"><img src="'+results.logo+'" height="100px" id="logo"  width="100px"><h5 class="pt-2" ><strong id="eventname">'+results.name+'</strong></h5><p >'+results.info+'</p></div></div><form id="form1">@csrf<div class="row" style="margin-top: 50px;" id="student_no"> '+select_tag+' </div></form><div class="row" ><div class="col" style="padding-left: 0;padding-right: 0;"><button type="button" class="btn btn-success" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);" ><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 12px" ></i> Edit</button></div><div class="col" style="padding-right:  0;padding-left: 0;"><button type="button" class="btn btn-danger" id="savebtn" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #9be15d 0%, #00e3ae 100%);" ><i class="fa fa-save" aria-hidden="true" style="font-size: 12px" ></i> Save</button></div></div></div>');
         
-        $("#savebtn").click(function(){
+        $("#savebtn").click(function(event){
+          event.stopPropagation();
+          event.stopImmediatePropagation();
             var sid=[];
                 for(var i=0;i<results.students;i++)
                         {
@@ -246,7 +248,7 @@ button.btn
                                     url: "{{ url('/event/students/list') }}",
                                     method: 'get',
                                     data: {
-                                            id:$('#eventid').val(),
+                                            id:$('#eventselect').val(),
                                     },
                                     success: function(studentslist){
                                                 create_card(results,studentslist);

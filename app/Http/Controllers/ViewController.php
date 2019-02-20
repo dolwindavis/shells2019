@@ -105,7 +105,7 @@ class ViewController extends Controller
             }
             $result->push($subresult);
         }
-        dd($result);
+        // dd($result);
         return view('eventlist',compact('events'));
     }
 
