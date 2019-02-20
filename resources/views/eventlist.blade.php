@@ -92,10 +92,11 @@ button.btn
         @foreach($results as $result)
             <div class="col-md-3 m-2 card-1 border-r-sm" style="min-width:300px;min-height:450px;overflow:visible;">
                 {{-- delete card code --}}
-                <form action="" method="post">
-                    @csrf
-                    @method('DELETE')   
-                <button type="submit" class="close-btn"> <i class="fa fa-times" aria-hidden="true"></i> </button>
+                <form action="/student/event/delete" method="post">
+                    @csrf   
+                    <input type='hidden' name="groupid" value="{{$result->groupid}}"/>
+                    <input type='hidden' name="eventid" value="{{$result->eventid}}"/>
+                    <button type="submit" class="close-btn"> <i class="fa fa-times" aria-hidden="true"></i> </button>
                 </form>
                 <div class="row" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);position: relative;top:-20px;">
                    
@@ -107,20 +108,25 @@ button.btn
                             <p>{{$result->eventinfo }}</p>
                     </div>
                 </div>
-            <form id="form1">
+            <form id="form1" action="/student/event/edit" method="get">
             @csrf
             <div class="row text-center" style="margin-top: 50px;" id="student_no">
             @foreach($result->students as $student)
                     <span class="badge badge-success p-3 my-3 mx-2">{{ $student->name  }}</span>
+                    <input type="hidden" value="{{$student->id}}" name="student">
+                    
             @endforeach
             </div>
-            </form>
+            
             <div class="row" >
             <div class="col" style="padding-left: 0;padding-right: 0;">
-            <button type="button" class="btn btn-success" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);" >
-        <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 12px" >
+            <input type="hidden" value="{{$result->eventid}}" name="eventid">
+            <input type="hidden" value="{{$result->groupid}}" name="groupid">
+            <button type="submit" class="btn btn-success" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);" >
+            <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 12px" >
         </i> Edit</button>
         </div>
+        </form>
         <div class="col" style="padding-right:  0;padding-left: 0;">
             <button type="button" class="btn btn-danger" id="savebtn" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #9be15d 0%, #00e3ae 100%);" >
             <i class="fa fa-save" aria-hidden="true" style="font-size: 12px" >
@@ -144,10 +150,11 @@ button.btn
             </div>
               <div class="back" style="width:100%;position:absolute;left:0px;">
                   <h4>SELECT AN EVENT YOU LIKE TO PARTICIPATE</h4>
-                  <form action="">
+                  <form action="/student/register/event" method="POST">
+                  @csrf
                     <div class="selectdiv" style="padding:10px;">
                             <label>
-                                <select id="eventselect">
+                                <select id="eventselect" name="id">
                                     <option selected value="">Select Event </option>
                                     @foreach($events as $event)
                                         <option value="{{ $event->id }}">{{ $event->name }}</option>
@@ -156,7 +163,7 @@ button.btn
                                 </select>
                             </label>
                           </div>
-                          <button type="button" class="btn btn-success" style="width: 50%;position:absolute;bottom:0;left:6em;background-image: linear-gradient(to top, #9be15d 0%, #00e3ae 100%);" id="btnadd"><i class="fa fa-add" aria-hidden="true"></i> ADD</button>
+                          <button type="submit" class="btn btn-success" style="width: 50%;position:absolute;bottom:0;left:6em;background-image: linear-gradient(to top, #9be15d 0%, #00e3ae 100%);" id="btnadd"><i class="fa fa-add" aria-hidden="true"></i> ADD</button>
               </div>
             </form>
             </div>

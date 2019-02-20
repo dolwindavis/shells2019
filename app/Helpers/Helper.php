@@ -47,15 +47,17 @@ class Helper
 
     }
 
-    public function studentSort($request,$eventid)
+    public function studentSort($eventid)
     {
         $user=Auth::user();
         $sortedstudents =[];
         $i=0;
         $students=$user->student()->select('name','id')->get();
-        if($substudent->isEmpty()){
+        if($students->isEmpty()){
 
-            return response('falso');
+            session()->flash('failure','Success');
+
+            return redierect('events/register');
 
         }
         $currentevent=Events::where('id',$eventid)->first();
@@ -84,13 +86,32 @@ class Helper
                     }
 
                 }
-                $sortedstudents[$i]=$student;
-                $i++;
+                // $sortedstudents[$i]=$student;
+                // $i++;
         }
-        return $sortedstudents;
+        // return $sortedstudents;
+
+        return $students;
 
     }
 
+    public function studentSorts($eventid)
+    {
+        $user=Auth::user();
+        $sortedstudents =[];
+        $i=0;
+        $students=$user->student()->select('name','id')->get();
+        if($students->isEmpty()){
+
+            session()->flash('failure','Success');
+
+            return redierect('events/register');
+
+        }
+        return $students;
+
+    }
+    
 
     public function eventRegisterDetails()
     {
@@ -120,7 +141,7 @@ class Helper
                         $substudent->name = $student->name;
                         $substudent->id = $student->id;
                         $students->push($substudent);
-                        $subresult->groupid=$eventstudent->groupid;
+                        $subresult->groupid=$eventstudent->group_id;
                     // }
 
                 }
@@ -137,22 +158,11 @@ class Helper
             $subresult->students=$students;
             $result->push($subresult);
         }
-
         return $result;
     }
 
 
-    public function eventDelete($request){
 
-        $eventid=$request->id;
-
-        $user=Auth::user();
-
-        $events=DB::tabele(eventstudent)->where([['college_id',$user->id],['event_id',$eventid]])->delete();
-
-        return 'true';
-
-    }
 
 
     

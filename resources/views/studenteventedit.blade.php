@@ -16,7 +16,7 @@
 
   <!-- student Registration form -->
 
-  <form method="POST" action="/student/event/register">
+  <form method="POST" action="/student/event/edit">
   @csrf
   <!--Name details -->
 <div class="row p-4" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);position: relative;top:-20px;">
@@ -62,6 +62,7 @@
         @endif
 </div>
 <input type="hidden" value="{{$event->id}}" name="eventid"/>
+<input type="hidden" value="{{$groupid}}" name="groupid" />
 <div class="row pt-4" style="padding: 1.5rem;">
   <div class="col-md-12 col-sm-12" style="padding-left: 0;padding-right: 0; margin: 0px auto;"> 
   <button type="submit" class="btn btn-success wt-h btn-rm-d p-3" style="letter-spacing: 1px;font-size: 1em; border-radius: 4px;">Add</button>
