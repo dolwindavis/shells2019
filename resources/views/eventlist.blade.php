@@ -63,6 +63,18 @@ button.btn
     margin:0;
     left:0;
 }
+.close-btn
+{
+    background-color:#e74c3c;
+    padding:.4em .8em;
+    border:none;
+    border-radius:50%;
+    color:white;
+    position: absolute;
+    right:-5px;
+    top:-15px;
+    z-index:99;
+}
 </style>
 @endsection
 
@@ -78,8 +90,15 @@ button.btn
 
             {{-- card design start --}}
         @foreach($results as $result)
-            <div class="col-md-3 m-2 card-1 border-r-sm" style="min-width:300px;min-height:450px;">
-                <div class="row" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);">
+            <div class="col-md-3 m-2 card-1 border-r-sm" style="min-width:300px;min-height:450px;overflow:visible;">
+                {{-- delete card code --}}
+                <form action="" method="post">
+                    @csrf
+                    @method('DELETE')   
+                <button type="submit" class="close-btn"> <i class="fa fa-times" aria-hidden="true"></i> </button>
+                </form>
+                <div class="row" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);position: relative;top:-20px;">
+                   
                     <div class="bg-dark text-light pt-5" style="position: relative;top: 40px;width: 50%;margin: 10px auto;border-radius: 5px;">
                         <img src="{{$result->eventlogo}}" height="100px" id="logo"  width="100px">
                             <h5 class="pt-2" >
@@ -90,15 +109,9 @@ button.btn
                 </div>
             <form id="form1">
             @csrf
-            <div class="row" style="margin-top: 50px;" id="student_no">
+            <div class="row text-center" style="margin-top: 50px;" id="student_no">
             @foreach($result->students as $student)
-                <div class="selectdiv">
-                    <label>
-                        <select id="{{ 'selectbox'.$result->eventid }}" disabled>
-                            <option value="{{$student->id}}"> {{ $student->name }}</option>
-                        </select>
-                    </label>
-                </div>
+                    <span class="badge badge-success p-3 my-3 mx-2">{{ $student->name  }}</span>
             @endforeach
             </div>
             </form>
@@ -131,6 +144,7 @@ button.btn
             </div>
               <div class="back" style="width:100%;position:absolute;left:0px;">
                   <h4>SELECT AN EVENT YOU LIKE TO PARTICIPATE</h4>
+                  <form action="">
                     <div class="selectdiv" style="padding:10px;">
                             <label>
                                 <select id="eventselect">
@@ -144,6 +158,7 @@ button.btn
                           </div>
                           <button type="button" class="btn btn-success" style="width: 50%;position:absolute;bottom:0;left:6em;background-image: linear-gradient(to top, #9be15d 0%, #00e3ae 100%);" id="btnadd"><i class="fa fa-add" aria-hidden="true"></i> ADD</button>
               </div>
+            </form>
             </div>
           </section>
         
@@ -171,111 +186,111 @@ button.btn
 
 
   <script>
-    var select_tag="";
-    var student_list="";
-    //   create card code
-      function create_card(results,studentslist)
-      {
-        select_tag="";
-        student_list="";
-                       for(var j=0;j<studentslist.length;j++)
-                          {
-                            student_list+='<option value="'+studentslist[j].id+'">'+studentslist[j].name+'</option>';
-                        }
-                        for(var i=0;i<results.students;i++)
-                        {
+    // var select_tag="";
+    // var student_list="";
+    // //   create card code
+    //   function create_card(results,studentslist)
+    //   {
+    //     select_tag="";
+    //     student_list="";
+    //                    for(var j=0;j<studentslist.length;j++)
+    //                       {
+    //                         student_list+='<option value="'+studentslist[j].id+'">'+studentslist[j].name+'</option>';
+    //                     }
+    //                     for(var i=0;i<results.students;i++)
+    //                     {
                            
-                            select_tag+='<div class="selectdiv"><label><select id="selectbox'+i+'">'+student_list+'</select></label></div>';
+    //                         select_tag+='<div class="selectdiv"><label><select id="selectbox'+i+'">'+student_list+'</select></label></div>';
                                
-                        }
-        $(document).ready(function(){
-        $('#addcol').append('<div class="col-md-3 m-2 card-1 border-r-sm" style="min-width:300px;min-height:450px;"><div class="row" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);"><div class="bg-dark text-light pt-5" style="position: relative;top: 40px;width: 50%;margin: 10px auto;border-radius: 5px;"><img src="'+results.logo+'" height="100px" id="logo"  width="100px"><h5 class="pt-2" ><strong id="eventname">'+results.name+'</strong></h5><p >'+results.info+'</p></div></div><form id="form1">@csrf<div class="row" style="margin-top: 50px;" id="student_no"> '+select_tag+' </div></form><div class="row" ><div class="col" style="padding-left: 0;padding-right: 0;"><button type="button" class="btn btn-success" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);" ><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 12px" ></i> Edit</button></div><div class="col" style="padding-right:  0;padding-left: 0;"><button type="button" class="btn btn-danger" id="savebtn" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #9be15d 0%, #00e3ae 100%);" ><i class="fa fa-save" aria-hidden="true" style="font-size: 12px" ></i> Save</button></div></div></div>');
-        
-        $("#savebtn").click(function(event){
-          event.stopPropagation();
-          event.stopImmediatePropagation();
-            var sid=[];
-                for(var i=0;i<results.students;i++)
-                        {
-                             sid[i]=$('#selectbox'+i).val();
-                        }
-            $.ajaxSetup({
-               headers: {
-                   'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-               }
-           });
-            $.ajax({
-               url: "{{ url('/student/event/register') }}",
-               method: 'get',
-               data: {
-                        eventid:results.id,
-                        studentid:sid,
-               },
-               success: function(response){
-                    console.log(response);
-                  }});
-        });
-        });
-        console.log(results,studentslist);
-        
-      }
-
-        // selection in card code
-    //   function selectno(result,students)
-    //   { 
+    //                     }
     //     $(document).ready(function(){
-    //                     $('div#student_no').append(' <div class="selectdiv"><label><select id="selectbox"><option selected value="">Select Box </option>'+students(students)+'</select></label></div>');
+    //     $('#addcol').append('<div class="col-md-3 m-2 card-1 border-r-sm" style="min-width:300px;min-height:450px;"><div class="row" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);"><div class="bg-dark text-light pt-5" style="position: relative;top: 40px;width: 50%;margin: 10px auto;border-radius: 5px;"><img src="'+results.logo+'" height="100px" id="logo"  width="100px"><h5 class="pt-2" ><strong id="eventname">'+results.name+'</strong></h5><p >'+results.info+'</p></div></div><form id="form1">@csrf<div class="row" style="margin-top: 50px;" id="student_no"> '+select_tag+' </div></form><div class="row" ><div class="col" style="padding-left: 0;padding-right: 0;"><button type="button" class="btn btn-success" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);" ><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 12px" ></i> Edit</button></div><div class="col" style="padding-right:  0;padding-left: 0;"><button type="button" class="btn btn-danger" id="savebtn" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #9be15d 0%, #00e3ae 100%);" ><i class="fa fa-save" aria-hidden="true" style="font-size: 12px" ></i> Save</button></div></div></div>');
+        
+    //     $("#savebtn").click(function(event){
+    //       event.stopPropagation();
+    //       event.stopImmediatePropagation();
+    //         var sid=[];
+    //             for(var i=0;i<results.students;i++)
+    //                     {
+    //                          sid[i]=$('#selectbox'+i).val();
+    //                     }
+    //         $.ajaxSetup({
+    //            headers: {
+    //                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+    //            }
+    //        });
+    //         $.ajax({
+    //            url: "{{ url('/student/event/register') }}",
+    //            method: 'get',
+    //            data: {
+    //                     eventid:results.id,
+    //                     studentid:sid,
+    //            },
+    //            success: function(response){
+    //                 console.log(response);
+    //               }});
     //     });
+    //     });
+    //     console.log(results,studentslist);
+        
     //   }
+
+    //     // selection in card code
+    // //   function selectno(result,students)
+    // //   { 
+    // //     $(document).ready(function(){
+    // //                     $('div#student_no').append(' <div class="selectdiv"><label><select id="selectbox"><option selected value="">Select Box </option>'+students(students)+'</select></label></div>');
+    // //     });
+    // //   }
 
    
 
 
-     $(document).ready(function(){
+    //  $(document).ready(function(){
        
-          // ajax request for addbtn
-        $('#btnadd').click(function(e){
+    //       // ajax request for addbtn
+    //     $('#btnadd').click(function(e){
             
-            e.preventDefault();
-            $.ajaxSetup({
-               headers: {
-                   'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-               }
-           });
-            $.ajax({
-               url: "{{ url('/event/details') }}",
-               method: 'get',
-               data: {
-                id:$('#eventselect').val(),
-               },
-               success: function(result){
-                       var results=result;
-                        $.ajaxSetup({
-                             headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                    }
-                                    });
-                                    $.ajax({
-                                    url: "{{ url('/event/students/list') }}",
-                                    method: 'get',
-                                    data: {
-                                            id:$('#eventselect').val(),
-                                    },
-                                    success: function(studentslist){
-                                                create_card(results,studentslist);
+    //         e.preventDefault();
+    //         $.ajaxSetup({
+    //            headers: {
+    //                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+    //            }
+    //        });
+    //         $.ajax({
+    //            url: "{{ url('/event/details') }}",
+    //            method: 'get',
+    //            data: {
+    //             id:$('#eventselect').val(),
+    //            },
+    //            success: function(result){
+    //                    var results=result;
+    //                     $.ajaxSetup({
+    //                          headers: {
+    //                                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+    //                                 }
+    //                                 });
+    //                                 $.ajax({
+    //                                 url: "{{ url('/event/students/list') }}",
+    //                                 method: 'get',
+    //                                 data: {
+    //                                         id:$('#eventselect').val(),
+    //                                 },
+    //                                 success: function(studentslist){
+    //                                             create_card(results,studentslist);
                                                
-                                                // students(students);
-                                        }}); 
-                  }});
-            });
+    //                                             // students(students);
+    //                                     }}); 
+    //               }});
+    //         });
 
-            // student in a particular event details
+    //         // student in a particular event details
       
 
             
-            // ajax request for savebtn
+    //         // ajax request for savebtn
             
-         });
+    //      });
     </script>
 
 

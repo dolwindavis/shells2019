@@ -59,7 +59,8 @@ Route::get('/event/students/list','EventController@eventParticipant');//[request
 
 Route::get('/student/event/register','EventController@eventRegister');//[request=>id,studentid[],eventid response=>true]
 
-
+//test route 
+Route::get('/student/event','ViewController@addEvent');
 
 
 //Authentication controllers

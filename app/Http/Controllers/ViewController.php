@@ -128,6 +128,11 @@ class ViewController extends Controller
 
         return view('studentadd',compact('student'));
     }
+    //text function
+    public function addEvent()
+    {
+        return view('student_event');
+    }
 
 
 }
