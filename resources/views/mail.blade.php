@@ -84,7 +84,7 @@ May the best team win....#GameON
                 </tr>
                 <tr>
                     <td align="center" valign="top" style="padding: 0; font-family: Open Sans, Helvetica, Arial, sans-serif;">
-                        <h1 style="margin-top:-10px;font-size: 40px; color: #ffffff;">SHELLS 2K19</h1>
+                        <h1 style="margin-top:-20px;font-size: 40px; color: #565656;">SHELLS 2K19</h1>
                     </td>
                 </tr>
                 <tr>
@@ -106,12 +106,16 @@ May the best team win....#GameON
                 <tr>
                     <td align="center" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; padding-top: 0;">
 
-                        <p style="color: #b7bdc9; font-size: 16px; line-height: 24px; margin: 0;">
-                        Greetings {{$name}}    .This mail consists of the user id that has been assigned to your college for participating in Shells 2K19.
-
+                        <p style="color: #565656; font-size: 16px; line-height: 24px; margin: 0;">
+                        Greetings {{$name}}, <br/>This mail consists of the user id that has been assigned to your college for participating in Shells 2K19.
+                            <br />
                             <b>Note </b>
-                            *This ID should be used to login to various aptitude rounds of various events.<br>
-                            *This is going to be your individual team ID that is assigned to your college  with which all the participants belonging to the same college can check their progress or status in various events.
+                            <br />
+                            <ul>
+                                <li style="text-align: left;"> This ID should be used to login to various aptitude rounds of various events. </li>
+                                <li style="text-align: left;"> This is going to be your individual team ID that is assigned to your college  with which all the participants belonging to the same college can check their progress or status in various events.
+                            </ul>
+                            <br/>
 
                             <b>USER ID: {{ $username}} </b>
 
@@ -126,7 +130,7 @@ May the best team win....#GameON
                         <table border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td align="center" style="border-radius: 28px;" bgcolor="#2b388f">
-                                    <a href="http://shells.kristujayanti.edu.in" target="_blank" style="font-size: 15px;letter-spacing: 1.5px; font-family: Open Sans, Helvetica, Arial, sans-serif; font-weight: 900; color: #1b75bb; text-decoration: none; border-radius: 28px; background-color: #FFF; padding: 13px 25px; border: 1px solid #FFF; display: block;"> VISIT</a>
+                                    <a href="http://shells.kristujayanti.edu.in" target="_blank" style="font-size: 15px;letter-spacing: 1.5px; font-family: Open Sans, Helvetica, Arial, sans-serif; font-weight: 900; color: #fff; text-decoration: none; border-radius: 28px; background-color: #2b388f; padding: 10px 25px; border: 1px solid #FFF; display: block;"> VISIT</a>
                                 </td>
                             </tr>
                         </table>

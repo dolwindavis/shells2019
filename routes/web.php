@@ -105,3 +105,6 @@ Route::get('/logout',function(){
 });
 
 Route::get('event/{slug}','ViewController@eventdetailsView');
+
+
+Route::get('/notify','NotificationController@NewsNotification');

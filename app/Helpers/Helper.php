@@ -53,6 +53,11 @@ class Helper
         $sortedstudents =[];
         $i=0;
         $students=$user->student()->select('name','id')->get();
+        if($substudent->isEmpty()){
+
+            return response('falso');
+
+        }
         $currentevent=Events::where('id',$eventid)->first();
         foreach($students as $key =>  $student){
                 
