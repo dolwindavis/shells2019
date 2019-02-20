@@ -5,10 +5,10 @@
 
 <div class="container-fluid" style="padding: 0px;">
   <div style=" height:400px; width: 100%; background-color: #03a9f4; object-fit: cover; object-position: center;" >
-    <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/bg.jpg" width="100%" height="100%" style="object-fit: cover;">
+    <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/80910.jpg" style="object-fit: cover; object-position: bottom;" height="100%" width="100%">    
   </div>
 </div>
-<div class="container text-center card-3 border-r-sm" id="card-sign-in">
+<div class="col-md-4 container text-center card-3 border-r-sm" id="card-sign-in">
   <div class="row text-center p-3" >
       <div class="col-md-12 p-2">
     <h3><strong >SIGN IN</strong></h3>
@@ -21,12 +21,12 @@
 @csrf
 <div class="row p-4">
   <div class="col-md-12 col-xs-12">
-  <input type="text" class="form-control wt-h ht-f" placeholder="Username" name="email">
+  <input type="text" class="form-control wt-h ht-f" placeholder="Email" name="email">
   </div>
 </div>
 <div class="row p-4">
   <div class="col-md-12 col-xs-12"> 
-  <input type="password" class="form-control wt-h ht-f" placeholder="password" name="password">
+  <input type="password" class="form-control wt-h ht-f" placeholder="Password" name="password">
   </div>
 </div>
 <div class="row p-4">

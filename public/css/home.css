@@ -12759,7 +12759,7 @@ h1, h2, h3, h4, h5, h6, ul {
   position: relative;
   top: -100px;
   right: 0;
-  width: 30%; }
+}
 
 .wt-h {
   width: 100%; }
@@ -12851,8 +12851,8 @@ h1, h2, h3, h4, h5, h6, ul {
   color: black; }
 
 .border-l {
-  border-left: 3px solid #616161; }
-
+  /* border-left: 2px solid #616161; } */
+}
 .gra-blue {
   background: #499bea;
   background: -moz-radial-gradient(center, ellipse cover, #499bea 0%, #499bea 31%, #207ce5 91%, #207ce5 100%);

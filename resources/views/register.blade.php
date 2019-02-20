@@ -6,7 +6,7 @@
 @section('content')
 <div class="container-fluid" style="padding: 0px;">
     <div style=" height:400px; width: 100%; " >
-    <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/bg.jpg" style="object-fit: cover; object-position: bottom;" height="100%" width="100%">
+     <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/80910.jpg" style="object-fit: cover; object-position: bottom;" height="100%" width="100%">
     </div>
   </div>
   <div class="container text-center p-2 card-3 border-r-sm drop-shadow" id="card-register-in">
@@ -51,7 +51,7 @@
     </div> 
   <div class="row p-4">
     <div class="col-md-12 col-xs-12"> 
-    <button type="submit" class="btn gra-blue wt-h" style="letter-spacing: 2px;">Register</button>
+    <button type="submit" class="btn gra-blue wt-h" style="letter-spacing: 2px; ">Register</button>
     <br>
    </form>
    <!-- form ends -->

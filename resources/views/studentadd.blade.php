@@ -8,7 +8,7 @@
 <!-- Sign in page -->
 <div class="container-fluid" style="padding: 0px;">
   <div style=" height:400px; width: 100%; background-color: #03a9f4; object-fit: cover; object-position: center;"  >
-    <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/signin/bg8.jpeg" width="100%" height="100%" style="object-fit: cover; object-position: top;">
+    <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/80910.jpg" width="100%" height="100%" style="object-fit: cover; object-position: bottom;">
   </div>
 </div>
 <div class="container text-center card-2 border-r-sm" id="card-register-in">
@@ -76,14 +76,14 @@
 <!-- course details -->
 <div class="row p-4">
   <div class="col-md-12 col-xs-12"> 
-  <input type="text" class="form-control wt-h ht-f" placeholder="course" name="course" value={{$student->course}}>
+  <input type="text" class="form-control wt-h ht-f" placeholder="Course" name="course" value={{$student->course}}>
   </div>
 </div>
 
 <!-- Register Number details -->
 <div class="row p-4">
   <div class="col-md-12 col-xs-12"> 
-  <input type="text" class="form-control wt-h ht-f" placeholder="reg_no" name="reg_no" value={{$student->reg_no}}>
+  <input type="text" class="form-control wt-h ht-f" placeholder="Register No" name="reg_no" value={{$student->reg_no}}>
   </div>
 </div>
 
@@ -94,9 +94,9 @@
   </div>
 </div>
 
-<div class="row pt-4">
-  <div class="col-md-12 col-xs-12" style="padding-left: 0;padding-right: 0;"> 
-  <button type="submit" class="btn btn-success wt-h btn-rm-d p-3" style="letter-spacing: 1px;font-size: 1em;">Add</button>
+<div class="row pt-4" style="padding: 1.5rem;">
+  <div class="col-md-12 col-sm-12" style="padding-left: 0;padding-right: 0; margin: 0px auto;"> 
+  <button type="submit" class="btn gra-blue wt-h btn-rm-d p-3" style="letter-spacing: 1px;font-size: 1em; border-radius: 4px;">Add</button>
   <br>
 </div>
 </div>
