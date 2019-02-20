@@ -47,38 +47,71 @@ class Helper
 
     }
 
-    public function studentSort($request)
+    public function studentSort($eventid)
     {
         $user=Auth::user();
         $sortedstudents =[];
         $i=0;
         $students=$user->student()->select('name','id')->get();
+        if($students->isEmpty()){
 
+            session()->flash('failure','Success');
+
+            return redierect('events/register');
+
+        }
+        $currentevent=Events::where('id',$eventid)->first();
         foreach($students as $key =>  $student){
                 
                 $eventstudent = EventStudent::where('student_id',$student->id)->get();
-
+                $flag=0;
                 if($eventstudent->isNotEmpty()){
 
                     foreach($eventstudent as  $es){
 
+                        $flag=0;
+                        
                         $event=Events::where('id',$es->event_id)->first();
+                        if($event->exclusive == '1' || $es->event_id == $eventid || $currentevent->exclusive == '1'){
 
-                        if($event->exclusive == '1'){
-
-                            $students->forget($key);
-                            continue;
+                            $flag=1;
+                            
                         }
+                    
+                    }
+                    if($flag==1){
+
+                        $students->forget($key);
+                        continue;
                     }
 
                 }
-                $sortedstudents[$i]=$student;
-                $i++;
+                // $sortedstudents[$i]=$student;
+                // $i++;
         }
-        return $sortedstudents;
+        // return $sortedstudents;
+
+        return $students;
 
     }
 
+    public function studentSorts($eventid)
+    {
+        $user=Auth::user();
+        $sortedstudents =[];
+        $i=0;
+        $students=$user->student()->select('name','id')->get();
+        if($students->isEmpty()){
+
+            session()->flash('failure','Success');
+
+            return redierect('events/register');
+
+        }
+        return $students;
+
+    }
+    
 
     public function eventRegisterDetails()
     {
@@ -108,7 +141,7 @@ class Helper
                         $substudent->name = $student->name;
                         $substudent->id = $student->id;
                         $students->push($substudent);
-                        $subresult->groupid=$eventstudent->groupid;
+                        $subresult->groupid=$eventstudent->group_id;
                     // }
 
                 }
@@ -125,7 +158,12 @@ class Helper
             $subresult->students=$students;
             $result->push($subresult);
         }
-
         return $result;
     }
+
+
+
+
+
+    
 }

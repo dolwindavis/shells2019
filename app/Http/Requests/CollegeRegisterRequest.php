@@ -6,6 +6,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CollegeRegisterRequest extends FormRequest
 {
+
+
+    protected $redirect='errors';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,7 +31,7 @@ class CollegeRegisterRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'phoneno' => 'required|digits:10',
-            'password' => 'required|string|gte:8',
+            'password' => 'required|string',
             //'confirm' => 'required|same:password',
             //'stay' => 'required'
             //'faculty' => 'required'
@@ -50,4 +53,6 @@ class CollegeRegisterRequest extends FormRequest
             'phone.requied'  => 'phone number Required!'
         ];
     }
+
+ 
 }

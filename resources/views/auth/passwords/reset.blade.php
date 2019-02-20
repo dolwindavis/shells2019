@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title','SHELLS2k19 | Students Add')
 
 @section('content')
 <div class="container">

@@ -2,6 +2,16 @@
 @section('title','SHELLS2k19 | HOME')
 
 @section('content')
+
+  @if (session('message'))
+  <script>
+  Swal.fire(
+  'Sign Up Successful!',
+  'Please Check Your Email!',
+  'success'
+)
+  </script>
+@endif
   <!-- carosel -->
 <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
 

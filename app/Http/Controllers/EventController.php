@@ -6,50 +6,53 @@ use App\Models\Events;
 use App\Helpers\Helper;
 use App\Models\EventStudent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
     function eventDetails(Request $request)
     {
-        $eventid = $request->input('id');
+        $eventid = $request->id;
 
-        $event=Events::find($eventid);
+        $event=Events::where('id',$eventid)->first();
 
+        // $payload=collect();
+
+        // $payload->put('id',$event->id);
+        // $payload->put('name',$event->name);
+        // $payload->put('logo',$event->logo);
+        // $payload->put('info',$event->info);
+
+        // if($event->groupevent == '1'){
+
+        //     $payload->put('students',$event->groupnumber);
+
+        // }
+        // else{
+
+        //     $payload->put('students','1');
+        // }
         
-        $payload=collect();
-
-        $payload->put('id',$event->id);
-        $payload->put('name',$event->name);
-        $payload->put('logo',$event->logo);
-        $payload->put('info',$event->info);
-
-        if($event->groupevent == '1'){
-
-            $payload->put('students',$event->groupnumber);
-
-        }
-        else{
-
-            $payload->put('students','1');
-        }
-        return response()->json($payload);
+        $students=$this->eventParticipant($eventid);
+        
+        return view('student_event',compact('event','students'));
 
     }
 
-    function eventParticipant(Request $request)
+    function eventParticipant($eventid)
     {
-        $eventid = $request->input('id');
+       
         
         $helper = new Helper;
 
-        $student = $helper->studentSort($request);
+        $student = $helper->studentSort($eventid);
 
         // $user=Auth::user();
 
         // $student=$user->student()->select('name','id')->get();
 
-        return response()->json($student);
+        return $student;
 
     }
 
@@ -57,7 +60,11 @@ class EventController extends Controller
     //register an event for the student
     public function eventRegister(Request $request)
     {
-        $studentid=$request->studentid;
+        
+
+        $studentid=[];
+
+        // $studentid=$request->studentid;
 
         $eventid=$request->eventid;
 
@@ -66,10 +73,25 @@ class EventController extends Controller
         //evennt details
         $event=Events::find($request->eventid);
 
+        if($event->groupevent == 1){
+
+            for($i=1;$i<=$event->groupnumber;$i++){
+
+                $variablename='student'.$i;
+                $studentid[$i-1]=$request->$variablename;
+
+            }
+
+        }
+        else{
+            $studentid[0]=$request->student1;
+        }
+
         //checking a student eligible for ragistering
         for($i=0;$i<= count($studentid)-1;$i++){
 
             $eventstudent=EventStudent::where([['student_id',$studentid[$i] ],['event_id',$eventid]])->get();
+
             //checking for exclusive event validation
             if($event->exclusive == '1' && $eventstudent->isNotEmpty()){
 
@@ -84,7 +106,7 @@ class EventController extends Controller
         //checking college already registered or not
         if($event->groupevent == '1' && $eventstudent->isNotEmpty()){
 
-            return response('college already registered');
+            return response('college already registered in this event');
 
         }
         //checking individual event registraion validation
@@ -99,15 +121,19 @@ class EventController extends Controller
             return response('groupevent number validation');
 
         }
+        elseif(count($studentid) !== count(array_unique($studentid))){
+
+            return response('same participants can not be repeated');
+        }
 
         if($event->groupevent == '1'){
 
-            $request->groupid=str_random(4);
+            $request->groupid=str_random(6);
 
         }
         else{
 
-            $request->groupid='0';
+            $request->groupid=str_random(6);
 
         }
         
@@ -118,7 +144,113 @@ class EventController extends Controller
             $newevent->registerEventStudent($request);
         }
 
-        return response('true');
+        return redirect('/events/register');
+
+    }
+
+    public function eventEditView(Request $request)
+    {
+
+        $studentid=$request->student;
+        $eventid=$request->eventid;
+        $groupid=$request->groupid;
+
+        $event=Events::find($eventid);
+        $helper = new Helper;
+
+        $students = $helper->studentSorts($eventid);
+
+
+        return view('studenteventedit',compact('event','students','groupid'));
+         
+    }
+
+
+    public function eventEdit(Request $request)
+    {   
+        
+        $studentid=[];
+
+        // $studentid=$request->studentid;
+
+        $eventid=$request->eventid;
+        $groupid=$request->groupid;
+
+        $user=Auth::user();
+
+        //evennt details
+        $event=Events::find($request->eventid);
+
+        if($event->groupevent == 1){
+
+            for($i=1;$i<=$event->groupnumber;$i++){
+
+                $variablename='student'.$i;
+                $studentid[$i-1]=$request->$variablename;
+
+            }
+
+        }
+        else{
+
+            $studentid[0]=$request->student1;
+        }
+
+        //checking a student eligible for ragistering
+        // for($i=0;$i<= count($studentid)-1;$i++){
+
+        //     $eventstudent=EventStudent::where([['student_id',$studentid[$i] ],['event_id',$eventid]])->get();
+
+        //     //checking for exclusive event validation
+        //     if($eventstudent->isNotEmpty()){
+
+        //         return redirect()->back();
+
+        //     }
+
+        // }
+
+        $eventstudent=EventStudent::where([['college_id',$user->id],['event_id',$eventid],['group_id',$groupid]])->get();
+        
+        if($eventstudent->isEmpty()){
+
+            return redirect()->back();
+
+        }
+
+        //checking whether request has same number of students or not for an event
+        if($event->groupevent == '1' && (count($studentid) != $event->groupnumber)){
+
+            return redirect()->back();
+
+        }
+        elseif(count($studentid) !== count(array_unique($studentid))){
+
+            return redirect()->back();
+        }
+
+        
+        foreach($eventstudent as $key=> $es){
+
+            $es->student_id = $studentid[$key];
+            $es->save(); 
+            
+        }
+
+        return redirect('/events/register');
+        
+    }
+    public function eventDelete(Request $request){
+
+        $eventid=$request->eventid;
+
+        $groupid =$request->groupid;
+        
+        $user=Auth::user();
+
+        $events=DB::table('eventstudent')->where([['college_id',$user->id],['event_id',$eventid],['group_id',$groupid]])->delete();
+
+        return redirect('/events/register');
 
     }
 }
