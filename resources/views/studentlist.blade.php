@@ -39,7 +39,9 @@
        <!--name details-->
        <div class="row mt-2">
          <div class="col pt-5">
-            <i class="fas fa-user-circle" style="font-size: 110px;"></i>
+            <img src="{{'https://ui-avatars.com/api/?name='.$student->name.'&rounded=true&size=110'}}" >
+          <!--  <i class="fas fa-user-circle" style="font-size: 110px;"></i> -->
+
            <h5 class="pt-2" ><strong >{{ $student->name }}</strong></h5>
          </div>
        </div>

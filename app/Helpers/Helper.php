@@ -47,28 +47,35 @@ class Helper
 
     }
 
-    public function studentSort($request)
+    public function studentSort($request,$eventid)
     {
         $user=Auth::user();
         $sortedstudents =[];
         $i=0;
         $students=$user->student()->select('name','id')->get();
-
+        $currentevent=Events::where('id',$eventid)->first();
         foreach($students as $key =>  $student){
                 
                 $eventstudent = EventStudent::where('student_id',$student->id)->get();
-
+                $flag=0;
                 if($eventstudent->isNotEmpty()){
 
                     foreach($eventstudent as  $es){
 
+                        $flag=0;
+                        
                         $event=Events::where('id',$es->event_id)->first();
+                        if($event->exclusive == '1' || $es->event_id == $eventid || $currentevent->exclusive == '1'){
 
-                        if($event->exclusive == '1'){
-
-                            $students->forget($key);
-                            continue;
+                            $flag=1;
+                            
                         }
+                    
+                    }
+                    if($flag==1){
+
+                        $students->forget($key);
+                        continue;
                     }
 
                 }
@@ -128,4 +135,20 @@ class Helper
 
         return $result;
     }
+
+
+    public function eventDelete($request){
+
+        $eventid=$request->id;
+
+        $user=Auth::user();
+
+        $events=DB::tabele(eventstudent)->where([['college_id',$user->id],['event_id',$eventid]])->delete();
+
+        return 'true';
+
+    }
+
+
+    
 }
