@@ -54,64 +54,63 @@ class ViewController extends Controller
 
     function eventlistView() {
 
-        // $events=Events::select('name','id')->get();
+        // // $events=Events::select('name','id')->get();
         $user=Auth::user();
 
         $helper = new Helper;
 
         $events=$helper->eventListSort();
 
-        $eventstudent =DB::table('eventstudent')
-                        ->join('students','eventstudent.student_id','=','students.id')
-                        ->join('events','eventstudent.event_id','=','events.id')
-                        ->select('events.id as eid','events.*','students.name as sname','students.id as sid','eventstudent.*')->get();
+//         $eventstudent =DB::table('eventstudent')
+//                         ->join('students','eventstudent.student_id','=','students.id')
+//                         ->join('events','eventstudent.event_id','=','events.id')
+//                         ->select('events.id as eid','events.*','students.name as sname','students.id as sid','eventstudent.*')->get();
 
-        $result=collect();
+//         $result=collect();
 
-        foreach($eventstudent as $es){
+//         foreach($eventstudent as $es){
 
-            $subresult=collect();
+//             $subresult=collect();
 
-            $subresult->eventname=$es->name;
-            $subresult->eventlogo=$es->logo;
-            $subresult->eventid=$es->eid;
-            $subresult->eventinfo=$es->info;
-            $groupid=$es->group_id;
-            if($es->groupevent == '1'){
+//             $subresult->eventname=$es->name;
+//             $subresult->eventlogo=$es->logo;
+//             $subresult->eventid=$es->eid;
+//             $subresult->eventinfo=$es->info;
+//             $groupid=$es->group_id;
+//             if($es->groupevent == '1'){
                 
-                $students =collect();
-                foreach ($eventstudent as $key => $student) {
+//                 $students =collect();
+//                 foreach ($eventstudent as $key => $student) {
 
-                    $substudents=collect();
+//                     $substudents=collect();
 
-                    if($student->group_id == $groupid){
+//                     if($student->group_id == $groupid){
 
-                        $substudents->name=$student->sname;
-                        $substudents->id=$student->sid;
+//                         $substudents->name=$student->sname;
+//                         $substudents->id=$student->sid;
 
-                        $students->push($substudents);
+//                         $students->push($substudents);
 
-                        $eventstudent->pull($key);
-                    }
+//                         $eventstudent->pull($key);
+//                     }
 
-                }
-                $subresult->students=$students;
-            }
-            else{
+//                 }
+//                 $subresult->students=$students;
+//             }
+//             else{
 
-               $subresult->studentname=$es->sname;
-               $subresult->studentid=$es->id;
+//                $subresult->studentname=$es->sname;
+//                $subresult->studentid=$es->id;
 
-            }
-            $result->push($subresult);
-        }
-        // dd($result);
-        return view('eventlist',compact('events'));
+//             }
+//             $result->push($subresult);
+//         }
+//         // dd($result);
+//         return view('eventlist',compact('events'));
+        $results=$helper->eventRegisterDetails();
+        
+        return view('eventlist',compact('events','results'));
     }
-
-
-
-
 
     function eventdetailsView(Request $request,$slug) {
 

@@ -13,7 +13,7 @@ class EventController extends Controller
     function eventDetails(Request $request)
     {
         $eventid = $request->input('id');
-
+        
         $event=Events::find($eventid);
 
         
@@ -43,7 +43,7 @@ class EventController extends Controller
         
         $helper = new Helper;
 
-        $student = $helper->studentSort($request);
+        $student = $helper->studentSort($request,$eventid);
 
         // $user=Auth::user();
 
@@ -70,6 +70,7 @@ class EventController extends Controller
         for($i=0;$i<= count($studentid)-1;$i++){
 
             $eventstudent=EventStudent::where([['student_id',$studentid[$i] ],['event_id',$eventid]])->get();
+
             //checking for exclusive event validation
             if($event->exclusive == '1' && $eventstudent->isNotEmpty()){
 
@@ -84,7 +85,7 @@ class EventController extends Controller
         //checking college already registered or not
         if($event->groupevent == '1' && $eventstudent->isNotEmpty()){
 
-            return response('college already registered');
+            return response('college already registered in this event');
 
         }
         //checking individual event registraion validation
@@ -98,6 +99,10 @@ class EventController extends Controller
 
             return response('groupevent number validation');
 
+        }
+        elseif(count($studentid) !== count(array_unique($studentid))){
+
+            return response('same participants can not be repeated');
         }
 
         if($event->groupevent == '1'){

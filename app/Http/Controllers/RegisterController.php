@@ -28,7 +28,8 @@ class RegisterController extends Controller
 
         $validated = $request->validated();
 
-
+ 
+        
         //beginning a Database transaction
         DB::beginTransaction();
 
@@ -50,13 +51,14 @@ class RegisterController extends Controller
 
             //rollback the transactions if any error occur
             DB::rollBack();
-            return redirect()->route('register');
+            return redirect('register');
 
         }
 
         //sending mail to the user
-        $this->sendMail($newuser);
+        $this->sendMail($newuser,$newcollege);
 
+        session()->flash('message','Success');
 
         return redirect('home');
         
@@ -89,6 +91,8 @@ class RegisterController extends Controller
 
         }
 
+        session()->flash('success','Success');
+
         return redirect('/student');
 
     }
@@ -104,6 +108,7 @@ class RegisterController extends Controller
 
         $student->updateStudent($request);
 
+        session()->flash('update','Success');
         return redirect('/student');
     }
 
@@ -120,7 +125,7 @@ class RegisterController extends Controller
             return redirect('/student');
 
         }
-
+        session()->flash('delete','Success');
         return redirect('/student');
     }
     
@@ -184,12 +189,19 @@ class RegisterController extends Controller
     }
 
 
-    function sendMail($newuser)
+    function sendMail($newuser,$newcollege)
     {
         $mail=$newuser->email;
         $username=$newuser->username;
-        $name=$newuser->name;
+        $name=$newcollege->name;
         Mail::to($mail)->send(new RegisterMail($username,$name));
         
+    }
+
+    function errorView(Request $request){
+
+        session()->flash('failed','Success');
+        return redirect('register');
+
     }
 }

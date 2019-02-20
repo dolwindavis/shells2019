@@ -2,7 +2,31 @@
 @section('title','SHELLS2k19 | STUDENTLIST')
 
 @section('content')
-
+@if (session('success'))
+  <script>
+  Swal.fire(
+  'New Student Added!',
+  '#Game On!',
+  'success'
+)
+</script>
+@elseif(session('update'))
+<script>
+  Swal.fire(
+  'Updated Succesfully !',
+  '#Game On!',
+  'success'
+)
+</script>
+@elseif(session('delete'))
+<script>
+  Swal.fire(
+  'Deleted Succesfully !',
+  '#Game On!',
+  'success'
+)
+</script>
+@endif
 <div class="container-fluid mb-5 " style="margin-top: 100px; ">
   <h3 class="p-5">Student's Registered</h3>
   <div class="container " style="box-sizing: border-box; ">
@@ -15,7 +39,9 @@
        <!--name details-->
        <div class="row mt-2">
          <div class="col pt-5">
-            <i class="fas fa-user-circle" style="font-size: 110px;"></i>
+            <img src="{{'https://ui-avatars.com/api/?name='.$student->name.'&rounded=true&size=110'}}" >
+          <!--  <i class="fas fa-user-circle" style="font-size: 110px;"></i> -->
+
            <h5 class="pt-2" ><strong >{{ $student->name }}</strong></h5>
          </div>
        </div>

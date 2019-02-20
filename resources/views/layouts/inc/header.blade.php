@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-light ">
-    <div><a class="ml-2" href="#" class=""><img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/home/logo.png
-" width="100%" height="100%"></a></div>
-    <div class="container">
+    <div><a class="ml-2" href="#" class=""><img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/home/kjc-logo-black.png
+" width="55px" height="55px"></a></div>
+    <div class="container" style="padding-left: 5px;">
     <button class="navbar-toggler mr-5" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="sr-only">Toggle navigation</span>
     <span class="navbar-toggler-icon"></span>
