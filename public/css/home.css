@@ -12865,7 +12865,12 @@ h1, h2, h3, h4, h5, h6, ul {
 
 /*background in student list*/
 .bg-st-li {
-  background-image: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%); }
+  /* background-image: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);  */
+  border: solid 2px #565656;
+  color: #565656;
+  /* margin: 5px; */
+  /* max-width: 32%; */
+}
 
 /*remove button default style*/
 .btn-rm-d {
