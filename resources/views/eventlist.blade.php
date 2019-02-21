@@ -98,7 +98,7 @@ elseif(session('update'))
   'success'
 )
   </script>
-elseif(session('update'))
+elseif(session('delete'))
 
   <script>
   Swal.fire(

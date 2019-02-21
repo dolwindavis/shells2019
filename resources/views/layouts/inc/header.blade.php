@@ -20,12 +20,12 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/events') }}">Events</a>
         </li>
-        <li class="nav-item">
+        <!--<li class="nav-item">
           <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/news') }}">News</a>
-        </li>
+        </li>-->
 <!-- Authenticated user Drop Down Menu -->
 
         @if(Auth::User())
@@ -35,7 +35,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('student') }}">Student Registration</a>
-            <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('events/register') }}">Event Registration</a> 
+            <!--<a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('events/register') }}">Event Registration</a>--> 
             <a class="dropdown-item" href="{{ url('logout') }}" >Logout</a>
           </div>
         </li>

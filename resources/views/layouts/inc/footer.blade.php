@@ -7,7 +7,7 @@
           <a href="/contact" class="d-block p-2 text-light" style="font-size: 12px;"> Contact Us</a>
           <a href="/register" class="d-block p-2 text-light" style="font-size: 12px;"> Register</a>
           <a href="/login" class="d-block p-2 text-light" style="font-size: 12px;">Login</a>
-          <a href="/rules" class="d-block p-2 text-light" style="font-size: 12px;">Rules</a>
+          <!--<a href="/rules" class="d-block p-2 text-light" style="font-size: 12px;">Rules</a>-->
         </div>
         <div class="col-md-6" style="height:200px !important">
           <div class="mapouter" >

@@ -7,6 +7,7 @@ use App\Models\Events;
 use App\Models\College;
 use App\Models\Student;
 use App\Mail\RegisterMail;
+use App\Models\EventStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -144,6 +145,16 @@ class RegisterController extends Controller
 //delete a student
     function studentDelete(Request $request,$studentid)
     {
+
+        $student=EventStudent::find($studentid)->get();
+
+        if($student){
+
+            session()->flash('deletefailure','Success');
+            return back();
+
+        }
+
         try{
 
             $student=Student::find($studentid)->delete();
