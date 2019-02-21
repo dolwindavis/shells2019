@@ -115,9 +115,14 @@ class ViewController extends Controller
     function eventdetailsView(Request $request,$slug) {
 
 
+
         $events=Events::where('slug',$slug)->get();
 
+        if($events->isEmpty()){
 
+            return redirect('/events');
+
+        }
         return view('events',compact('events'));
     }
 

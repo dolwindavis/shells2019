@@ -57,7 +57,7 @@ class Helper
 
             session()->flash('failure','Success');
 
-            return redierect('events/register');
+            return redirect('events/register');
 
         }
         $currentevent=Events::where('id',$eventid)->first();
@@ -105,7 +105,7 @@ class Helper
 
             session()->flash('failure','Success');
 
-            return redierect('events/register');
+            return redirect('events/register');
 
         }
         return $students;

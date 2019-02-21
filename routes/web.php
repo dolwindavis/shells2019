@@ -50,24 +50,7 @@ Route::get('/event/details','EventController@eventDetails');
 
 
 //need to be Authenticated
-Route::get('/events/register', 'ViewController@eventlistView');
 
-//ajax requests
-Route::get('/event/details','EventController@eventDetails');//[request =>id   response=>name,logo,info,id]
-
-Route::get('/event/students/list','EventController@eventParticipant');//[request=>id response=>name,id]
-
-Route::post('/student/event/register','EventController@eventRegister');//[request=>id,studentid[],eventid response=>true]
-
-Route::post('/student/register/event','EventController@eventDetails');
-
-Route::get('/student/event/edit','EventController@eventEditView');
-
-Route::post('/student/event/edit','EventController@eventEdit');
-
-Route::post('/student/event/delete','EventController@eventDelete');
-//test route 
-Route::get('/student/event','ViewController@addEvent');
 
 
 //Authentication controllers
@@ -99,7 +82,26 @@ Route::middleware(['auth'])->group(function () {
     //deleting student
     Route::get('/student/delete/{studentid}','RegisterController@studentDelete');
 
-    //Registering event
+    
+
+    Route::get('/events/register', 'ViewController@eventlistView');
+
+    //ajax requests
+    Route::get('/event/details','EventController@eventDetails');//[request =>id   response=>name,logo,info,id]
+
+    Route::get('/event/students/list','EventController@eventParticipant');//[request=>id response=>name,id]
+
+    Route::post('/student/event/register','EventController@eventRegister');//[request=>id,studentid[],eventid response=>true]
+
+    Route::post('/student/register/event','EventController@eventDetails');
+
+    Route::get('/student/event/edit','EventController@eventEditView');
+
+    Route::post('/student/event/edit','EventController@eventEdit');
+
+    Route::post('/student/event/delete','EventController@eventDelete');
+    //test route 
+    Route::get('/student/event','ViewController@addEvent');
    
 });
 

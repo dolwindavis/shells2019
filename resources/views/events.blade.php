@@ -49,7 +49,7 @@
           </div>
         <!-- event head name pic and number -->
           <div class="col-md-4 card-3 text-light text-center p-5" style="border-radius: 5px; margin-bottom: 50px; background: url('https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/coordinater-bg.jpg'); background-size: 150%;">
-            <h4 style="margin-bottom: 5px; font-weight: 800; letter-spacing: 1px;">Student Coordinator</h4>
+            <h4 style="margin-bottom: 5px; font-weight: 800; letter-spacing: 1px;">Event Coordinator</h4>
             <div class="" style="margin: auto; border-radius: 0px;">
               <img src="{{ $event->head_image  }}" style="border-radius: 2px; object-fit: cover;object-position: left; margin-bottom: 5px;"  width="130px" height="150px">
               <h4>{{$event->head_name}}</h4>
