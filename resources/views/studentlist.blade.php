@@ -48,7 +48,7 @@
           <!--  <i class="fas fa-user-circle" style="font-size: 110px;"></i> 
 
     <div class="col-md m-2 card-1 border-r-sm bg-st-li" >
-       <!--name details-->
+       name details
        <div class="row mt-2">
          <div class="col pt-5">
          -->
@@ -118,6 +118,6 @@
 
   </div>
   </div>
-  <a href="">Go </a>
+ <!-- <a href="">Go </a> -->
 </div>
 @endsection
