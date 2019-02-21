@@ -13,7 +13,15 @@ class EventController extends Controller
 {
     function eventDetails(Request $request)
     {
+
+        if(!$request->id){
+
+            return back();
+
+        }
+
         $eventid = $request->id;
+
 
         $event=Events::where('id',$eventid)->first();
 
@@ -223,13 +231,13 @@ class EventController extends Controller
         if($event->groupevent == '1' && (count($studentid) != $event->groupnumber)){
 
             session()->flash('count','Success');
-            return redirect()->back();
+            return back();
 
         }
         elseif(count($studentid) !== count(array_unique($studentid))){
 
             session()->flash('same','Success');
-            return redirect()->back();
+            return back();
         }
 
         
