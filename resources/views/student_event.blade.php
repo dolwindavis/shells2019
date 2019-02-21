@@ -3,6 +3,32 @@
 
 @section('content')
 
+@if (session('same'))
+  <script>
+  Swal.fire(
+  'No Duplication On Participants!',
+  '#GameOn!',
+  'error'
+)
+  </script>
+elseif(session('count'))
+  <script>
+  Swal.fire(
+  'Check Your Participants Participants Count!',
+  '#GameOn!',
+  'success'
+)
+  </script>
+elseif(session('update'))
+
+  <script>
+  Swal.fire(
+  'Event Deleted!',
+  '#GameOn!',
+  'success'
+)
+  </script>
+@endif
 <!-- Sign in page -->
  
 <!-- Sign in page -->

@@ -30,6 +30,22 @@
   'success'
 )
 </script>
+@elseif(session('count'))
+<script>
+  Swal.fire(
+  'Can Not Register New Student !',
+  '12 Students Already Registered!',
+  'error'
+)
+</script>
+@elseif(session('failed'))
+<script>
+  Swal.fire(
+  'Check Your Details!',
+  '#GameOn!',
+  'error'
+)
+</script>s
 @endif
 <!--<div class="container-fluid mb-5 " style="margin-top: 100px; ">
   <h3 class="p-5">Student's Registered</h3>

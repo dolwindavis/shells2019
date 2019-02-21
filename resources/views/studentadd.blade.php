@@ -2,7 +2,23 @@
 @section('title','SHELLS2k19 | Students Add')
 
 @section('content')
-
+@if (session('failed'))
+  <script>
+  Swal.fire(
+  'Check Your Details!',
+  'Try Again!',
+  'error'
+)
+  </script>
+@elseif (session('regno'))
+  <script>
+  Swal.fire(
+  'Register Number Should Be Unique For A Student!',
+  'Try Again!',
+  'error'
+)
+  </script>
+@endif
 <!-- Sign in page -->
  
 <!-- Sign in page -->
@@ -29,7 +45,7 @@
   <!--Name details -->
 <div class="row p-4">
   <div class="col-md-12 col-xs-12">
-  <input type="text" class="form-control wt-h ht-f" placeholder="Participant Name" name="name" value="{{ $student->name }}">
+  <input type="text" class="form-control wt-h ht-f" placeholder="Participant Name" name="name" value="{{ $student->name }}" required>
   </div>
 </div>
 
@@ -42,7 +58,7 @@
     <div class="form-check form-check-radio form-check-inline">
     <label class="form-check-label">
     @if(!$student || $student->gender !='male')
-    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male"> Male
+    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" checked> Male
     @else
     <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" checked> Male
     @endif
@@ -69,28 +85,28 @@
 <!--Phone Number Details-->
 <div class="row p-4">
   <div class="col-md-12 col-xs-12"> 
-  <input type="text" class="form-control wt-h ht-f" placeholder="Phone Number" name="phone" value={{ $student->phone }}>
+  <input type="text" class="form-control wt-h ht-f" placeholder="Phone Number" name="phone" value="{{ $student->phone }}" required>
   </div>
 </div>
 
 <!-- course details -->
 <div class="row p-4">
   <div class="col-md-12 col-xs-12"> 
-  <input type="text" class="form-control wt-h ht-f" placeholder="Course" name="course" value={{$student->course}}>
+  <input type="text" class="form-control wt-h ht-f" placeholder="Course" name="course" value="{{$student->course}}" required>
   </div>
 </div>
 
 <!-- Register Number details -->
 <div class="row p-4">
   <div class="col-md-12 col-xs-12"> 
-  <input type="text" class="form-control wt-h ht-f" placeholder="Register No" name="reg_no" value={{$student->reg_no}}>
+  <input type="text" class="form-control wt-h ht-f" placeholder="Register No" name="reg_no" value="{{$student->reg_no}}" required>
   </div>
 </div>
 
 <!-- Email id-->
 <div class="row p-4">
   <div class="col-md-12 col-xs-12"> 
-  <input type="email" class="form-control wt-h ht-f" placeholder="Email" name="email" value={{$student->email}}>
+  <input type="email" class="form-control wt-h ht-f" placeholder="Email" name="email" value="{{$student->email}}" required>
   </div>
 </div>
 

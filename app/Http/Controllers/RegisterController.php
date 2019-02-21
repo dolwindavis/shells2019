@@ -68,6 +68,7 @@ class RegisterController extends Controller
 //Registration of the students
     public function registerStudent(StudentRegisterRequest $request)
     {
+
         
         // validation rules => StudentRegisterRequest 
         $validated = $request->validated();
@@ -76,7 +77,31 @@ class RegisterController extends Controller
         //retriving authenticated user
         $user = Auth::user();
 
+        $count=Student::where('college_id',$user->id)->get();
+
+        if($count->count() >= 12){
+
+            session()->flash('count','Success');
+            return redirect('/student');
+
+        }
         
+        $students = Student::where('college_id',$user->id)->get();
+
+        if($students->isNotEmpty()){
+
+            foreach($students as $key=>$student){
+
+                if($student->reg_no == $request->reg_no){
+
+                    session()->flash('regno','Success');
+                    return redirect('/student/register');
+                }
+
+            }
+
+        }
+
         //registering a new student
         $newstudent = new Student;
 
@@ -87,6 +112,7 @@ class RegisterController extends Controller
         }
         catch(Exception $e){
 
+            session()->flash('failure','Success');
             return redirect('/student/register');
 
         }
@@ -103,6 +129,9 @@ class RegisterController extends Controller
         
         // validation rules => StudentRegisterRequest 
         $validated = $request->validated();
+
+        $user=Auth::user();
+        $students = Student::where('college_id',$user->id)->get();
 
         $student=Student::find($studentid);
 
@@ -198,10 +227,17 @@ class RegisterController extends Controller
         
     }
 
-    function errorView(Request $request){
+    function errorRegisterView(Request $request){
 
         session()->flash('failed','Success');
         return redirect('register');
+
+    }
+
+    function errorStudentView(Request $request){
+
+        session()->flash('failed','Success');
+        return redirect('/student/register');
 
     }
 }

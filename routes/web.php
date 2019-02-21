@@ -27,7 +27,9 @@ Route::get('/register','ViewController@registerView');
 
 Route::get('/events','ViewController@eventsView');
 
-Route::get('/errors','RegisterController@errorView');
+Route::get('/errorsregister','RegisterController@errorRegisterView');
+
+Route::get('/errorsstudent','RegisterController@errrorStudentView');
 
 //Controller => RegisterController
 //Registering a college 

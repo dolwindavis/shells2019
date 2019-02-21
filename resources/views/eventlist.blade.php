@@ -79,6 +79,32 @@ button.btn
 @endsection
 
 @section('content')
+@if (session('register'))
+  <script>
+  Swal.fire(
+  'Event Registered!',
+  '#GameOn!',
+  'success'
+)
+  </script>
+elseif(session('update'))
+  <script>
+  Swal.fire(
+  'Event Updated!',
+  '#GameOn!',
+  'success'
+)
+  </script>
+elseif(session('update'))
+
+  <script>
+  Swal.fire(
+  'Event Deleted!',
+  '#GameOn!',
+  'success'
+)
+  </script>
+@endif
 
 <div class="container-fluid mb-5 " style="margin-top: 100px; ">
     <h3 class="p-5">Event Registration</h3>

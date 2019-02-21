@@ -144,6 +144,7 @@ class EventController extends Controller
             $newevent->registerEventStudent($request);
         }
 
+        session()->flash('register','Success');
         return redirect('/events/register');
 
     }
@@ -221,11 +222,13 @@ class EventController extends Controller
         //checking whether request has same number of students or not for an event
         if($event->groupevent == '1' && (count($studentid) != $event->groupnumber)){
 
+            session()->flash('count','Success');
             return redirect()->back();
 
         }
         elseif(count($studentid) !== count(array_unique($studentid))){
 
+            session()->flash('same','Success');
             return redirect()->back();
         }
 
@@ -237,6 +240,7 @@ class EventController extends Controller
             
         }
 
+        session()->flash('update','Success');
         return redirect('/events/register');
         
     }
@@ -250,6 +254,7 @@ class EventController extends Controller
 
         $events=DB::table('eventstudent')->where([['college_id',$user->id],['event_id',$eventid],['group_id',$groupid]])->delete();
 
+        session()->flash('delete','Success');
         return redirect('/events/register');
 
     }
