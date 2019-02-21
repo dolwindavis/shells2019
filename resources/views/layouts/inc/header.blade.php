@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-light">
   <div class="container">
-    <a class="ml-2" href="#" class=""><img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/home/shells-logo.png
+    <a class="ml-2" href="/" class=""><img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/home/shells-logo.png
 " width="55px" height="55px"></a>
 <h3 class="border-l p-2 text-dark" style="letter-spacing: 2px;"><b>SHELLS 2K19</b></h3>
  
@@ -20,7 +20,12 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/events') }}">Events</a>
         </li>
-
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('/news') }}">News</a>
+        </li>
 <!-- Authenticated user Drop Down Menu -->
 
         @if(Auth::User())
@@ -30,7 +35,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('student') }}">Student Registration</a>
-            <a class="dropdown-item" href="{{ url('events/register') }}">Event Registration</a> 
+            <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('events/register') }}">Event Registration</a> 
             <a class="dropdown-item" href="{{ url('logout') }}" >Logout</a>
           </div>
         </li>
