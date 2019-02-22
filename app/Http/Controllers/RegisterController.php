@@ -164,13 +164,12 @@ class RegisterController extends Controller
 
         $student=EventStudent::where('student_id',$studentid)->get();
 
-        if($student){
+        if($student->isNotEmpty()){
 
             session()->flash('deletefailure','Success');
             return back();
 
         }
-
         try{
 
             $student=Student::find($studentid)->delete();
