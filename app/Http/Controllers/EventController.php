@@ -25,22 +25,6 @@ class EventController extends Controller
 
         $event=Events::where('id',$eventid)->first();
 
-        // $payload=collect();
-
-        // $payload->put('id',$event->id);
-        // $payload->put('name',$event->name);
-        // $payload->put('logo',$event->logo);
-        // $payload->put('info',$event->info);
-
-        // if($event->groupevent == '1'){
-
-        //     $payload->put('students',$event->groupnumber);
-
-        // }
-        // else{
-
-        //     $payload->put('students','1');
-        // }
         
         $students=$this->eventParticipant($eventid);
         
@@ -51,14 +35,15 @@ class EventController extends Controller
     function eventParticipant($eventid)
     {
        
+        if(!$eventid){
+
+            return back();
+
+        }
         
         $helper = new Helper;
 
         $student = $helper->studentSort($eventid);
-
-        // $user=Auth::user();
-
-        // $student=$user->student()->select('name','id')->get();
 
         return $student;
 
@@ -72,7 +57,11 @@ class EventController extends Controller
 
         $studentid=[];
 
-        // $studentid=$request->studentid;
+        if(!$request->eventid || $request->groupid){
+            
+            return back()->with('badrequest', 'success');
+
+        }
 
         $eventid=$request->eventid;
 
@@ -86,52 +75,67 @@ class EventController extends Controller
             for($i=1;$i<=$event->groupnumber;$i++){
 
                 $variablename='student'.$i;
+                if(!$request->$variablename){
+
+                    return back()->with('badrequest', 'success');
+
+                }
                 $studentid[$i-1]=$request->$variablename;
 
             }
 
         }
         else{
+            if(!$request->student1){
+
+                return back()->with('badrequest', 'success');
+
+            }
             $studentid[0]=$request->student1;
         }
 
         //checking a student eligible for ragistering
-        for($i=0;$i<= count($studentid)-1;$i++){
+        // for($i=0;$i<= count($studentid)-1;$i++){
 
-            $eventstudent=EventStudent::where([['student_id',$studentid[$i] ],['event_id',$eventid]])->get();
+        //     $eventstudent=EventStudent::where([['student_id',$studentid[$i] ],['event_id',$eventid]])->get();
 
-            //checking for exclusive event validation
-            if($event->exclusive == '1' && $eventstudent->isNotEmpty()){
+        //     //checking for exclusive event validation
+        //     if($event->exclusive == '1' && $eventstudent->isNotEmpty()){
 
-                return response('exclusive event validation');
+        //         return response('exclusive event validation');
 
-            }
+        //     }
 
-        }
+        // }
 
         $eventstudent=EventStudent::where([['college_id',$user->id],['event_id',$eventid]])->get();
  
         //checking college already registered or not
         if($event->groupevent == '1' && $eventstudent->isNotEmpty()){
 
-            return response('college already registered in this event');
+            //one time register
+            session()->flash('otr','Success');
+            return back();
 
         }
         //checking individual event registraion validation
         elseif($event->maxnumber <= $eventstudent->count() && $event->groupevent == '0'){
 
-            return response('individual registration max');
+        session()->flash('max','Success');
+           return back();
 
         }
         //checking whether request has same number of students or not for an event
         elseif($event->groupevent == '1' && (count($studentid) != $event->groupnumber)){
 
-            return response('groupevent number validation');
+            session()->flash('count','Success');
+            return back();
 
         }
         elseif(count($studentid) !== count(array_unique($studentid))){
 
-            return response('same participants can not be repeated');
+            session()->flash('same','Success');
+            return back();
         }
 
         if($event->groupevent == '1'){
@@ -160,6 +164,10 @@ class EventController extends Controller
     public function eventEditView(Request $request)
     {
 
+        if(!$request->student || !$request->eventid || !$request->groupid){
+
+            return back()->with('badrequest', 'success');
+        }
         $studentid=$request->student;
         $eventid=$request->eventid;
         $groupid=$request->groupid;
@@ -180,10 +188,19 @@ class EventController extends Controller
         
         $studentid=[];
 
+        
+        if(!$request->eventid || !$request->groupid){
+
+            return back()->with('badrequest', 'success');
+
+        }
+
         // $studentid=$request->studentid;
 
         $eventid=$request->eventid;
         $groupid=$request->groupid;
+
+
 
         $user=Auth::user();
 
@@ -195,6 +212,10 @@ class EventController extends Controller
             for($i=1;$i<=$event->groupnumber;$i++){
 
                 $variablename='student'.$i;
+                if(!$request->$variablename){
+
+                    return back()->with('badrequest', 'success');
+                }
                 $studentid[$i-1]=$request->$variablename;
 
             }
@@ -202,6 +223,10 @@ class EventController extends Controller
         }
         else{
 
+            if(!$request->student1){
+
+                return back()->with('badrequest', 'success');
+            }
             $studentid[0]=$request->student1;
         }
 
@@ -223,7 +248,7 @@ class EventController extends Controller
         
         if($eventstudent->isEmpty()){
 
-            return redirect()->back();
+            return back()->with('badrequest', 'success');
 
         }
 
@@ -254,6 +279,11 @@ class EventController extends Controller
     }
     public function eventDelete(Request $request){
 
+        if(!$request->eventid || !$request->groupid){
+            
+            return back();
+
+        }
         $eventid=$request->eventid;
 
         $groupid =$request->groupid;

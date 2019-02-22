@@ -118,7 +118,7 @@ class RegisterController extends Controller
 
         }
 
-        session()->flash('success','Success');
+
 
         return redirect('/student');
 
@@ -132,13 +132,29 @@ class RegisterController extends Controller
         $validated = $request->validated();
 
         $user=Auth::user();
-        $students = Student::where('college_id',$user->id)->get();
 
         $student=Student::find($studentid);
 
+        $students = Student::where('college_id',$user->id)->get();
+
+        if($students->isNotEmpty()){
+
+            foreach($students as $key=>$s){
+
+                if($s->reg_no == $request->reg_no && $s->reg_no != $student->reg_no ){
+
+                    session()->flash('regno','Success');
+
+                    return back();
+                    // return redirect('/student/register');
+                }
+
+            }
+
+        }
+
         $student->updateStudent($request);
 
-        session()->flash('update','Success');
         return redirect('/student');
     }
 
@@ -146,7 +162,7 @@ class RegisterController extends Controller
     function studentDelete(Request $request,$studentid)
     {
 
-        $student=EventStudent::find($studentid)->get();
+        $student=EventStudent::where('student_id',$studentid)->get();
 
         if($student){
 

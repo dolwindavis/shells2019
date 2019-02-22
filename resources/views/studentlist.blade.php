@@ -46,13 +46,12 @@
   'error'
 )
 </script>
-elseif(session('deletefailure'))
-
+@elseif(session('deletefailure'))
 <script>
 Swal.fire(
 'Student Registered an event!',
 'Student Can Not Be Deleted !',
-'success'
+'error'
 )
 </script>
 @endif

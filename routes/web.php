@@ -42,7 +42,7 @@ Route::get('/event/add',function ()
 
 });
 
-Route::post('/event/add','RegisterController@eventRegister');
+// Route::post('/event/add','RegisterController@eventRegister');
 
 Route::get('/event/details','EventController@eventDetails');
 
@@ -95,7 +95,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/student/event/register','EventController@eventRegister');//[request=>id,studentid[],eventid response=>true]
 
-    Route::post('/student/register/event','EventController@eventDetails');
+    Route::get('/student/register/event','EventController@eventDetails');
 
     Route::get('/student/event/edit','EventController@eventEditView');
 

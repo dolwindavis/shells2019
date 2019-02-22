@@ -42,6 +42,7 @@ class Student extends Model
         
             $user->student()->save($this);
 
+            session()->flash('success','Success');
         
     }
 
@@ -62,7 +63,7 @@ class Student extends Model
         
             $this->save();
 
-        
+            session()->flash('update','Success');
     }
 
 }
