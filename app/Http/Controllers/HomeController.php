@@ -56,6 +56,30 @@ class HomeController extends Controller
         return response()->file($file, $headers);
        
     }
+    
+    public function newsView(Request $request)
+    {
+        return View('news');
+    }
 
 
+    public function newsRegister(Request $request)
+    {
+        $body=$request->body;
+
+        $title=$request->title;
+
+        $date= date("Y-m-d H:i:s");
+
+        $slug = Str::slug($title, '-');
+
+        // $flight = App\Flight::create(['body' => $body,'title' => $title, 'slug' => $slug ,'date' => $date ]);
+    }
+
+    public function newsSlugView(Request $request,$slug)
+    {
+        $news=News::where('slug',$slug)->first();
+
+        // return View('news',compact('news'));
+    }
 }

@@ -42,11 +42,18 @@ Route::get('/schedule','HomeController@scheduleViewer');
 //Results
 Route::get('/results/add','ResultController@resultRegisterView');
 
-Route::get('/news',function ()
-{
-    return view('news');
 
-});
+//news
+
+Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
+
+Route::post('/news/add','HomeController@newsRegister');
+
+Route::get('/news/{slug}','HomeController@newsSlugView');
+
+
+
+
 
 
 //Controller => RegisterController
