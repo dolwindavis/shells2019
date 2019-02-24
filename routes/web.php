@@ -45,11 +45,17 @@ Route::get('/results/add','ResultController@resultRegisterView');
 
 //news
 
-Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
+Route::get('/news/trailer',function ()
+{
+    return view('news');
 
-Route::post('/news/add','HomeController@newsRegister');
+});
 
-Route::get('/news/{slug}','HomeController@newsSlugView');
+// Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
+
+// Route::post('/news/add','HomeController@newsRegister');
+
+// Route::get('/news/{slug}','HomeController@newsSlugView');
 
 
 
