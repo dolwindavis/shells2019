@@ -52,9 +52,18 @@
        </p>
   
       </div>
-      <div class="col-md-3  border" id="">
+      <div class="col-md-3  border" id="" style="max-height: 400px; overflow-y: scroll;">
         <h4 class="border-bottom border-primary mt-1">News</h4>
-  
+
+
+        <div class="news" style="border-bottom: solid 1px #ddd;">
+          <a href="#" style="text-decoration: none; color: #565656;">
+            <h4 style="font-family: Times New Roman; font-weight: 900; margin-bottom: 2px; line-height: 20px; margin-top: 2px;">Shells 2K19 Trailer watch for more information</h4>
+            <p style="margin-top: -8px;">25/2/2019</p>
+          </a>
+        </div>
+
+
       </div>
     </div>
   
