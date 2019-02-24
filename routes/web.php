@@ -37,7 +37,7 @@ Route::get('/contact',function ()
 
 });
 
-Route::get('/schedule','HomeController@sheduleViewer');
+Route::get('/schedule','HomeController@scheduleViewer');
 
 //Controller => RegisterController
 //Registering a college 
