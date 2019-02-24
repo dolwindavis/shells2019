@@ -56,4 +56,15 @@ class HomeController extends Controller
         return response()->file($file, $headers);
        
     }
+
+
+    public function registerNews(Request $request)
+    {
+        $body=$request->body;
+
+        $title=$request->title;
+
+        $date=Date.now;
+
+    }
 }

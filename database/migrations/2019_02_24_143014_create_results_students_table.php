@@ -13,13 +13,13 @@ class CreateResultsStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('results_students', function (Blueprint $table) {
-            
+        Schema::create('results_students', function (Blueprint $table) {
+
             $table->increments('id');
             $table->integer('results_main_id');
             $table->string('student_name');
             $table->integer('college_username');
-
+            $table->timestamps();
         });
     }
 
@@ -30,8 +30,6 @@ class CreateResultsStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('results_students', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('results_students');
     }
 }

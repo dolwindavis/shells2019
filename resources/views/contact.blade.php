@@ -17,7 +17,7 @@
       <div class="card-header card-header-rose" style="padding: 0px; margin-top: 10px; box-shadow: none;">
 
         <h4 class="card-title text-center">Staff Co-ordinator</h4>
-        <p class="category text-center">Prof. Ambika</p>
+        <p class="category text-center">Dr. Ambika P</p>
       </div>
       <div class="card-body text-center">
         <p class="p-2" style=" margin: 0;"><i class="fa fa-envelope"></i> ambika.p@kristujayanti.com</p>
@@ -53,7 +53,7 @@
       <div class="card-header card-header-primary" style="padding: 0px; margin-top: 10px; box-shadow: none;">
 
         <h4 class="card-title text-center">Student Coodinator</h4>
-        <p class="category text-center">Swapna</p>
+        <p class="category text-center">Swapna S</p>
       </div>
       <div class="card-body text-center">
         <p class="p-2"><i class="fa fa-envelope"></i> 17cs401046@kristujayanti.com</p>

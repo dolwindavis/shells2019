@@ -13,11 +13,11 @@ class CreateResultsMainTable extends Migration
      */
     public function up()
     {
-        Schema::table('results_main', function (Blueprint $table) {
-
+        Schema::create('results_main', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('event_id');
             $table->string('round_name');
+            $table->timestamps();
         });
     }
 
@@ -28,8 +28,6 @@ class CreateResultsMainTable extends Migration
      */
     public function down()
     {
-        Schema::table('results_main', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('results_main');
     }
 }

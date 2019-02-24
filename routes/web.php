@@ -42,6 +42,12 @@ Route::get('/schedule','HomeController@scheduleViewer');
 //Results
 Route::get('/results/add','ResultController@resultRegisterView');
 
+Route::get('/news',function ()
+{
+    return view('news');
+
+});
+
 
 //Controller => RegisterController
 //Registering a college 

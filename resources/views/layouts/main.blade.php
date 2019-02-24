@@ -60,8 +60,6 @@
       <script async defer src="https://buttons.github.io/buttons.js"></script>
       <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
       <script src="{{asset('js/material-kit.js?v=2.0.5')}}" type="text/javascript"></script>
-
-<script charset="UTF-8" src="//cdn.sendpulse.com/js/push/7275415d335ac4ce625dba3b319aeb56_0.js" async></script>
       
 </body>
 </html>
