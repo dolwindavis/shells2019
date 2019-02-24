@@ -39,6 +39,10 @@ Route::get('/contact',function ()
 
 Route::get('/schedule','HomeController@scheduleViewer');
 
+//Results
+Route::get('/results/add','ResultController@resultRegisterView');
+
+
 //Controller => RegisterController
 //Registering a college 
 
@@ -53,15 +57,6 @@ Route::get('/event/add',function ()
 // Route::post('/event/add','RegisterController@eventRegister');
 
 Route::get('/event/details','EventController@eventDetails');
-
-// Route::post('/events/list', function () {
-//     return response()->json(['success'=>'Data is successfully added']);
-// });
-
-
-//need to be Authenticated
-
-
 
 //Authentication controllers
 //Controller => LoginController
