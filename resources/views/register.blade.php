@@ -22,7 +22,7 @@
   <div class="container text-center p-2 card-3 border-r-sm drop-shadow" id="card-register-in">
     <div class="row text-center p-2" >
         <div class="col-md-12">
-      <h3 style="letter-spacing: 1px;" ><strong>REGISTER</strong></h3>
+      <h3 style="letter-spacing: 1px;" ><strong>COLLEGE REGISTRATION</strong></h3>
     </div>
     </div>
 
