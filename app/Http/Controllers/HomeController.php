@@ -58,13 +58,4 @@ class HomeController extends Controller
     }
 
 
-    public function registerNews(Request $request)
-    {
-        $body=$request->body;
-
-        $title=$request->title;
-
-        $date=Date.now;
-
-    }
 }

@@ -83,4 +83,14 @@ class ResultController extends Controller
         dd($result);
     }
 
+    public function registerNews(Request $request)
+    {
+        $body=$request->body;
+
+        $title=$request->title;
+
+        $date=Date.now;
+
+    }
+
 }
