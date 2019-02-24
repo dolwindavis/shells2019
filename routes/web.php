@@ -31,6 +31,14 @@ Route::get('/errorsregister','RegisterController@errorRegisterView');
 
 Route::get('/errorsstudent','RegisterController@errrorStudentView');
 
+Route::get('/contact',function ()
+{
+    return view('contact');
+
+});
+
+Route::get('/shedule','HomeController@sheduleViewer');
+
 //Controller => RegisterController
 //Registering a college 
 
