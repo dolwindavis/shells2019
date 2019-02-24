@@ -32,7 +32,7 @@
   @csrf
   <div class="row p-4">
     <div class="col-md-12 col-xs-12">
-    <input type="text" class="form-control wt-h ht-f" placeholder="College Name" name="name">
+    <input type="text" class="form-control wt-h ht-f" placeholder="College Name With Location" name="name">
     </div>
   </div>
   <div class="row p-4">
