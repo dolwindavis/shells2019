@@ -11,9 +11,7 @@ class ResultController extends Controller
     public function resultRegisterView(Request $request)
     {
         
-        $events=Events::select('name','id')->get();
-
-        return View('ResultAdd',compact('events'));
+    
 
     }
 
@@ -21,7 +19,6 @@ class ResultController extends Controller
     public function resultRegister(Request $request)
     {
         
-        $students=$request->students;
         
 
         DB::beginTransaction();

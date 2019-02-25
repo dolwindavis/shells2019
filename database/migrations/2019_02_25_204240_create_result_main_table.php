@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResultsMainTable extends Migration
+class CreateResultMainTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateResultsMainTable extends Migration
      */
     public function up()
     {
-        Schema::create('results_main', function (Blueprint $table) {
+        Schema::create('result_main', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('event_id');
-            $table->string('round_name');
+            $table->string('round');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateResultsMainTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('results_main');
+        Schema::dropIfExists('result_main');
     }
 }

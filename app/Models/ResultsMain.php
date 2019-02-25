@@ -9,4 +9,6 @@ class ResultsMain extends Model
     
     protected $table='results_main';
 
+    public $timestamps = true;
+
 }

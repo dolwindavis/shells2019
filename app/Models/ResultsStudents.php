@@ -10,5 +10,5 @@ class ResultsStudents extends Model
     
     protected $table='results_students';
 
-
+    public $timestamps = true;
 }

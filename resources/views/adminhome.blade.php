@@ -3,6 +3,15 @@
 
 @section('content')
 
+@if (session('Sucess'))
+  <script>
+  Swal.fire(
+  'News Added Successfully',
+  '#GameOn!',
+  'success'
+)
+  </script>
+@endif
     <!-- Header -->
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8" style="padding-top: 5px;">
       <div class="container-fluid">
@@ -112,28 +121,34 @@
             </div>
             <div class="card-body">
                 <!-- PUblish Results -->
-              <form>
+              <form method="post" action="/result/register">
+              @csrf
                 <div class="row">
                 
                   <!-- Event name -->
                   <div class="form-group col-md-6">
                     <label for="inputState">Event</label>
-                    <select id="inputState" class="form-control">
-                      <option selected>Choose...</option>
-                      <option> NavBot </option>
-                      <option> DeepCoder </option>
-                      <option> Lens Bians </option>
+                    <select id="inputState" class="form-control" name="eventid">
+                    
+                      <option selected >Choose...</option>
+                     
+                      <option value="1"> DeepCoder </option>
+                      <option value="2"> Lens Bians </option>
+            
                     </select>
                   </div>
 
                   <!-- Round Number -->
                   <div class="form-group col-md-6">
                     <label for="inputState">Round</label>
-                    <select id="inputState" class="form-control">
-                      <option selected>Choose...</option>
-                      <option> Round 1 </option>
-                      <option> Round 2 </option>
-                      <option> Round 3 </option>
+                    <select id="inputState" class="form-control" name="round">
+                      <option selected >Choose...</option>
+                      <option value="Round 1"> Round 1 </option>
+                      <option value="Round 2"> Round 2 </option>
+                      <option value="Round 3"> Round 3 </option>
+                      <option value="Round 4"> Round 4 </option>
+                      <option value="Round 5"> Round 5 </option>
+                      <option value="Round 6"> Round 6 </option>
                     </select>
                   </div>                
                 
@@ -141,11 +156,11 @@
                   <div class="form-group col-md-6">
 
                     <div class="custom-control custom-radio mb-3">
-                      <input name="custom-radio-2" class="custom-control-input" id="customRadio5" type="radio">
+                      <input name="eventtype" class="custom-control-input" id="customRadio5" type="radio" value="individual">
                       <label class="custom-control-label" for="customRadio5">Individual</label>
                     </div>
                     <div class="custom-control custom-radio mb-3">
-                      <input name="custom-radio-2" class="custom-control-input" id="customRadio6" checked="" type="radio">
+                      <input name="eventtype" class="custom-control-input" id="customRadio6" checked="" type="radio" value="group">
                       <label class="custom-control-label" for="customRadio6">Group</label>
                     </div>
                   </div>
@@ -153,10 +168,10 @@
                   <!-- no of participants -->
                   <div class="form-group col-md-6">
                     <label for="inputEmail4">Number of Participants</label>
-                    <input type="number" class="form-control" id="inputEmail4" placeholder="NUmber">
+                    <input type="number" class="form-control" id="inputEmail4" placeholder="NUmber" name="no">
                   </div>
 
-                  <button class="btn btn-icon btn-3 btn-primary" type="button" >
+                  <button class="btn btn-icon btn-3 btn-primary" type="submit" >
                         
                      <span class="btn-inner--text">Submit</span>
                     
@@ -181,21 +196,22 @@
               <!-- Chart -->
               <div class="chart" style="text-align: center;">
                 <!-- Publish News -->
-              <form>
+              <form action="/news/add" method ="post">
+              @csrf
                     <div class="col-md-12">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="title">
                     </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="text" placeholder="Date" class="form-control" />
+                            <input type="text" placeholder="Date" class="form-control" name="date"/>
                         </div>
                     </div> 
                     <div class="col-md-12">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Markup"></textarea>              
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Markup" name="body"></textarea>              
                     </div> 
-                    <button class="btn btn-icon btn-3 btn-primary" type="button" style="margin-top: 40px;">
+                    <button type="submit" class="btn btn-icon btn-3 btn-primary" type="button" style="margin-top: 40px;">
                         
                         <span class="btn-inner--text">Publish</span>
                     

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -65,21 +67,37 @@ class HomeController extends Controller
 
     public function newsRegister(Request $request)
     {
+        
         $body=$request->body;
 
         $title=$request->title;
 
-        $date= date("Y-m-d H:i:s");
+        $date= $request->date;
 
         $slug = Str::slug($title, '-');
 
-        // $flight = App\Flight::create(['body' => $body,'title' => $title, 'slug' => $slug ,'date' => $date ]);
+        $news = new News;
+        
+        $news->body = $body;
+        
+        $news->title = $title;
+        
+        $news->slug = $slug; 
+        
+        $news->date = $date;
+
+        $news->save();
+
+        session()->flash('sucess','Success');
+        return back();
     }
 
     public function newsSlugView(Request $request,$slug)
     {
         $news=News::where('slug',$slug)->first();
 
-        // return View('news',compact('news'));
+        dd($news);
+
+        return View('news-template',compact('news'));
     }
 }
