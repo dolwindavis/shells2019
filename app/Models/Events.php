@@ -9,10 +9,11 @@ class Events extends Model
 
     protected $table= 'events';
 
-    public function eventstudent()
+    public function studentDetails()
     {
          return $this->hasMany('App\Models\EventStudent','event_id');
     }
+    
 
     function registerEvent($request)
     {
