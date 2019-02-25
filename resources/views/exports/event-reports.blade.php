@@ -7,19 +7,19 @@
     <!-- Header -->
     <div class="header pb-8 pt-2 pt-md-5">
      
-      <div class="container-fluid ">
+      <div class="container">
          
         <div class="header-body">
           <h1 class="text-center text-white">EVENT DOWNLOAD</h1>
           <!-- Card stats -->
           <div class="row">
               @foreach ($events as $event)
-              <div class="col-md-3 my-3">
-                <div class="card">
+              <div class="col-md-4 my-3">
+                <div class="card" style="min-height: 200px;">
                     <div class="card-body">
-                      <h4 class="card-title">{{$event->name}}</h4>
+                      <h1 class="card-title" style="margin-bottom: 0px;">{{$event->name}}</h4>
                       <h5 class="card-title">{{$event->info}}</h5>
-                       <a href="/eventdetails/{{$event->id}}" class="btn btn-success"> Download </a>
+                       <a href="/eventdetails/{{$event->id}}" class="btn btn-success mt-5"> Download </a>
                     </div>
                   </div>
                 </div>    
