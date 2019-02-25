@@ -13,7 +13,7 @@
                     <th colspan="5">College Name :- {{$data['college']->name }}</th>
                 </tr>
                 <tr>
-                    <th colspan="5">College Name :- {{$data['college']->user->username}}</th>
+                    <th colspan="5">College Username :- {{$data['college']->user->username}}</th>
                 </tr>
         <tr>
             <th>S.no.</th>
