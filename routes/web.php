@@ -48,6 +48,10 @@ Route::get('/news',function ()
 
 });
 
+Route::get('/admin/home',function ()
+{
+    return view('adminhome');
+});
 
 //Controller => RegisterController
 //Registering a college 
