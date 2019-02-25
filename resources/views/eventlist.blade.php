@@ -90,7 +90,7 @@ button.btn
   'success'
 )
   </script>
-elseif(session('update'))
+@elseif(session('update'))
   <script>
   Swal.fire(
   'Event Updated!',
@@ -98,9 +98,8 @@ elseif(session('update'))
   'success'
 )
   </script>
-elseif(session('update'))
-
-  <script>
+@elseif(session('delete'))
+ <script>
   Swal.fire(
   'Event Deleted!',
   '#GameOn!',
@@ -138,7 +137,6 @@ elseif(session('update'))
                     </div>
                 </div>
             <form id="form1" action="/student/event/edit" method="get">
-            @csrf
             <div class="row text-center" style="margin-top: 20px; padding: 0px 5px;" id="student_no">
             @foreach($result->students as $student)
                     <span class="badge badge-success p-3 col" style="margin: 3px 3px; background: #ddd; color: #565656">{{ $student->name  }}</span>
@@ -175,8 +173,7 @@ elseif(session('update'))
             </div>
               <div class="back" style="width:100%;position:absolute;left:0px;">
                   <h4 style="color: #565656;">Select event you like to participate.</h4>
-                  <form action="/student/register/event" method="POST">
-                  @csrf
+                  <form action="/student/register/event" method="GET">
                     <div class="selectdiv" style="padding: 5px 0px 0px 10px;">
                             <label>
                                 <select id="eventselect" name="id">
@@ -197,7 +194,7 @@ elseif(session('update'))
      </div>
 {{-- card design end --}}
   {{-- card design start --}}
-  {{-- <div class="col-md-4 m-2 card-1 border-r-sm" style="max-width:350px"><div class="row" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);"><div class="bg-dark text-light pt-5" style="position: relative;top: 40px;width: 50%;margin: 10px auto;border-radius: 5px;"><img src="static/img/hom/person.png" height="100px" id="logo"  width="100px"><h5 class="pt-2" ><strong id="eventname"></strong></h5><p id="event_info"></p></div></div><form id="form1">@csrf<div class="row" style="margin-top: 50px;" id="student_no"></div></form><div class="row"><div class="col" style="padding-left: 0;padding-right: 0;"><button type="button" class="btn btn-success" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 12px"></i> Edit</button></div><div class="col" style="padding-right:  0;padding-left: 0;"><button type="button" class="btn btn-danger" id="savebtn" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #9be15d 0%, #00e3ae 100%);"><i class="fa fa-save" aria-hidden="true" style="font-size: 12px"></i> Save</button></div></div></div> --}}
+  {{-- <div class="col-md-4 m-2 card-1 border-r-sm" style="max-width:350px"><div class="row" style="background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);"><div class="bg-dark text-light pt-5" style="position: relative;top: 40px;width: 50%;margin: 10px auto;border-radius: 5px;"><img src="static/img/hom/person.png" height="100px" id="logo"  width="100px"><h5 class="pt-2" ><strong id="eventname"></strong></h5><p id="event_info"></p></div></div><form id="form1"><div class="row" style="margin-top: 50px;" id="student_no"></div></form><div class="row"><div class="col" style="padding-left: 0;padding-right: 0;"><button type="button" class="btn btn-success" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 12px"></i> Edit</button></div><div class="col" style="padding-right:  0;padding-left: 0;"><button type="button" class="btn btn-danger" id="savebtn" style="width: 100%;margin: 0px;border-radius: 0;background-image: linear-gradient(to top, #9be15d 0%, #00e3ae 100%);"><i class="fa fa-save" aria-hidden="true" style="font-size: 12px"></i> Save</button></div></div></div> --}}
   {{-- card design end --}}  
        
       

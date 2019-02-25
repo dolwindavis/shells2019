@@ -45,7 +45,15 @@
   '#GameOn!',
   'error'
 )
-</script>s
+</script>
+@elseif(session('deletefailure'))
+<script>
+Swal.fire(
+'Student Registered an event!',
+'Student Can Not Be Deleted !',
+'error'
+)
+</script>
 @endif
 <!--<div class="container-fluid mb-5 " style="margin-top: 100px; ">
   <h3 class="p-5">Student's Registered</h3>

@@ -3,7 +3,7 @@
 
 @section('content')
 
-@if (session('same'))
+@if(session('same'))
   <script>
   Swal.fire(
   'No Duplication On Participants!',
@@ -11,23 +11,39 @@
   'error'
 )
   </script>
-elseif(session('count'))
+@elseif(session('badrequest'))
+<script>
+Swal.fire(
+'Fill Your Form Curectly!',
+'#GameOn!',
+'error'
+)
+</script>
+@elseif(session('count'))
   <script>
   Swal.fire(
   'Check Your Participants Participants Count!',
   '#GameOn!',
-  'success'
+  'error'
 )
   </script>
-elseif(session('update'))
+@elseif(session('otr'))
 
   <script>
   Swal.fire(
-  'Event Deleted!',
+  'Your College is already registered!',
   '#GameOn!',
-  'success'
+  'error'
 )
   </script>
+@elseif(session('max'))
+<script>
+Swal.fire(
+'Registration id Reached Maximum!',
+'#GameOn!',
+'error'
+)
+</script>
 @endif
 <!-- Sign in page -->
  

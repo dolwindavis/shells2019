@@ -19,7 +19,7 @@ class Helper
 
         foreach($events as $key=>$event){
 
-            $eventstudent=EventStudent::where('event_id',$event->id)->get();
+            $eventstudent=EventStudent::where([['event_id',$event->id],['college_id',$user->id]])->get();
 
             if($eventstudent->isNotEmpty()){
                 // if($event->exclusive == '1'){

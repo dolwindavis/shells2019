@@ -44,4 +44,18 @@ class HomeController extends Controller
 
         dd($url);
     }
+
+    public function scheduleViewer(Request $request)
+    {
+
+        $file= public_path(). "/pdf/Schedule.pdf";
+        $headers = array(
+              'Content-Type: application/pdf',
+            );
+
+        return response()->file($file, $headers);
+       
+    }
+
+
 }

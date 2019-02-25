@@ -7,6 +7,7 @@ use App\Models\Events;
 use App\Models\College;
 use App\Models\Student;
 use App\Mail\RegisterMail;
+use App\Models\EventStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -117,7 +118,7 @@ class RegisterController extends Controller
 
         }
 
-        session()->flash('success','Success');
+
 
         return redirect('/student');
 
@@ -131,19 +132,44 @@ class RegisterController extends Controller
         $validated = $request->validated();
 
         $user=Auth::user();
-        $students = Student::where('college_id',$user->id)->get();
 
         $student=Student::find($studentid);
 
+        $students = Student::where('college_id',$user->id)->get();
+
+        if($students->isNotEmpty()){
+
+            foreach($students as $key=>$s){
+
+                if($s->reg_no == $request->reg_no && $s->reg_no != $student->reg_no ){
+
+                    session()->flash('regno','Success');
+
+                    return back();
+                    // return redirect('/student/register');
+                }
+
+            }
+
+        }
+
         $student->updateStudent($request);
 
-        session()->flash('update','Success');
         return redirect('/student');
     }
 
 //delete a student
     function studentDelete(Request $request,$studentid)
     {
+
+        $student=EventStudent::where('student_id',$studentid)->get();
+
+        if($student->isNotEmpty()){
+
+            session()->flash('deletefailure','Success');
+            return back();
+
+        }
         try{
 
             $student=Student::find($studentid)->delete();

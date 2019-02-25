@@ -31,6 +31,24 @@ Route::get('/errorsregister','RegisterController@errorRegisterView');
 
 Route::get('/errorsstudent','RegisterController@errrorStudentView');
 
+Route::get('/contact',function ()
+{
+    return view('contact');
+
+});
+
+Route::get('/schedule','HomeController@scheduleViewer');
+
+//Results
+Route::get('/results/add','ResultController@resultRegisterView');
+
+Route::get('/news',function ()
+{
+    return view('news');
+
+});
+
+
 //Controller => RegisterController
 //Registering a college 
 
@@ -42,18 +60,9 @@ Route::get('/event/add',function ()
 
 });
 
-Route::post('/event/add','RegisterController@eventRegister');
+// Route::post('/event/add','RegisterController@eventRegister');
 
 Route::get('/event/details','EventController@eventDetails');
-
-// Route::post('/events/list', function () {
-//     return response()->json(['success'=>'Data is successfully added']);
-// });
-
-
-//need to be Authenticated
-
-
 
 //Authentication controllers
 //Controller => LoginController
@@ -95,7 +104,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/student/event/register','EventController@eventRegister');//[request=>id,studentid[],eventid response=>true]
 
-    Route::post('/student/register/event','EventController@eventDetails');
+    Route::get('/student/register/event','EventController@eventDetails');
 
     Route::get('/student/event/edit','EventController@eventEditView');
 
