@@ -7,14 +7,14 @@
     <!-- Header -->
     <div class="header pb-8 pt-2 pt-md-5">
      
-      <div class="container-fluid ">
+      <div class="container ">
          
         <div class="header-body">
           <!-- Card stats -->
           <div class="row">
              
               @foreach ($colleges as $college) 
-              <div class="col-xl-3 col-lg-6" style="margin-bottom: 20px;">
+              <div class="col-xl-4 col-lg-4 col-md-4" style="margin-bottom: 20px;">
               
                   <div class="card card-stats mb-4 mb-xl-0">
                     <div class="card-body">
