@@ -11,7 +11,13 @@ class ResultController extends Controller
     public function resultRegisterView(Request $request)
     {
         
-    
+        $eventid=$request->$eventid;
+        $event=Event::where('id',$eventid)->first();
+        $round=$request->round;
+        $eventtype=$request->eventtype;
+        $no=$request->no;
+
+        return View('resultpublish',compact('event','round','no'));
 
     }
 

@@ -16,8 +16,8 @@
               <div class="col-md-6" style="margin: 10px auto;">
                 <div class="card" style="min-height: 200px; text-align: left;">
                     <div class="card-body">
-                        <h1 class="card-title" style="margin-bottom: 0px;">COZMO</h4>
-                        <h5 class="card-title">Round-1</h5>
+                        <h1 class="card-title" style="margin-bottom: 0px;">{{$event->name}}</h4>
+                        <h5 class="card-title">{{$round}}</h5>
 
                         <div class="form-group col-md-12" style="padding-left:0px;">
                             <input type="Name" class="form-control" id="inputEmail4" placeholder="Name">

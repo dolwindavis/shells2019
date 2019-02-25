@@ -46,7 +46,7 @@
             
             <ul class="navbar-nav ml-lg-auto">
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="/admin/logout">Logout</a>
+                    <a class="nav-link nav-link-icon" href="/logout">Logout</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

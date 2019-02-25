@@ -53,9 +53,9 @@ Route::get('/news/trailer',function ()
 
 });
 
-<<<<<<< HEAD
+
 Route::get('/news/{slug}','HomeController@newsSlugView');
-=======
+
 Route::get('/admin/home',function ()
 {
     return view('adminhome');
@@ -71,10 +71,9 @@ Route::get('/results', function()
     return view('results');
 });
 // Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
-})->middleware('auth','admin');
->>>>>>> 88a3334ac61b587638dda629adcd470582e6f5aa
 
-// Route::middleware(['auth','admin'])->group(function () {
+
+Route::middleware(['auth','admin'])->group(function () {
 
     Route::get('/admin/home',function ()
     {   
@@ -103,7 +102,7 @@ Route::get('/results', function()
 
 
 
-// });
+});
 
 
 

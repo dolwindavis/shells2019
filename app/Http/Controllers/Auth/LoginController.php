@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 class LoginController extends Controller
 {
     /*
@@ -43,4 +45,18 @@ class LoginController extends Controller
         session()->flash('failed','Success');
         return redirect('login');
     }
+
+    protected function sendLoginResponse(Request $request)
+    {
+        if(Auth::user()->username == 'admin'){
+
+            return redirect('/admin/home');
+
+        }
+        else{
+
+            return redirect('/student');
+
+        }
+    }   
 }
