@@ -24,6 +24,8 @@ class ExportController extends Controller
         // $count=count($event->eventstudent);
 
         $count=$eventstudent->count();
+        
+        $students=[];
 
         $j=0;
         for( $i=0; $i<$count; $i++ )
@@ -33,6 +35,7 @@ class ExportController extends Controller
 
                 $students[$j]=$s;
                 $j++;
+
             }
             
         }
