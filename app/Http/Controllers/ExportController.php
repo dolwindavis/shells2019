@@ -64,7 +64,9 @@ class ExportController extends Controller
         $events=Events::all();
        
         $filename=$college->name." - Report";
-        $sheetname=$college->id;
+        // $sheetname=$college->id;
+        $sheetname="Report";
+
 
         foreach($students as $student){
 
