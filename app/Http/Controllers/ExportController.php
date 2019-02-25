@@ -22,15 +22,23 @@ class ExportController extends Controller
         $eventstudent=EventStudent::where('event_id',$event->id)->get();
 
         // $count=count($event->eventstudent);
-        
+
         $count=$eventstudent->count();
 
-        
+        $j=0;
         for( $i=0; $i<$count; $i++ )
-        { 
-            $students[$i]=Student::findOrFail($event->eventstudent[$i]->student_id);
+        {   
+            $s=Student::findOrFail($event->eventstudent[$i]->student_id);
+            if($s->isNotEmpty()){
+
+                $students[$j]=$s;
+                $j++;
+            }
+            
         }
         // dd($students[0]->userDetails);
+
+
         $data=[
             'students' => $students,
             'event'=>$event,
