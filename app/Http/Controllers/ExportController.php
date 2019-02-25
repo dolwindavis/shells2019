@@ -30,16 +30,18 @@ class ExportController extends Controller
         $j=0;
         for( $i=0; $i<$count; $i++ )
         {   
-            $s=Student::findOrFail($event->eventstudent[$i]->student_id);
-            if($s->isNotEmpty()){
-
+            // dd($event->studentDetails[$i]->student_id);
+            $s=Student::findOrFail($event->studentDetails[$i]->student_id);
+            // dd($s);
+            if(!empty($s) > 0){
+                // dd($s);
                 $students[$j]=$s;
                 $j++;
 
             }
             
         }
-        // dd($students[0]->userDetails);
+        // dd($students);
 
 
         $data=[
