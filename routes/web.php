@@ -133,3 +133,5 @@ Route::get('/notify','NotificationController@NewsNotification');
 //excel report for event table
 Route::get('eventdetails/{id}','ExportController@event_details');
 Route::get('registration-form/{id}','ExportController@registration_form');
+// Route::get('registration-form/{id}','ExportController@student');
+

@@ -13,7 +13,7 @@
                     <th colspan="5">College Name :- {{$data['college']->name}}</th>
                 </tr>
                 <tr>
-                    {{-- <th colspan="5">College Name :- {{$data['college']->userDetails->username}}</th> --}}
+                    <th colspan="5">College Name :- {{$data['college']->user->username}}</th>
                 </tr>
         <tr>
             <th>S.no.</th>
@@ -38,18 +38,18 @@
             @php
               $i=1;$j=0;  
             @endphp
-       @foreach( $data['students'] as $key => $student )
+       @foreach($data['students'] as $key => $student )
             <tr>
                 <td>{{$i++}}</td>
                 <td colspan="2">{{ $student->name}}</td>
-                <td>{{ $student['eventstudent']->pluck('event_id') }}</td>
+                {{-- <td>{{ $student->events->first() }}</td> --}}
                 @foreach ( $data['events'] as $event )
                   <td>
                       
-                 @if ($event->id == $student->id )
-                  <b>{{$event->id}}</b> 
+                 @if ($event->id == $student->events->first())
+                  <b>yes</b> 
                     @else
-                       <b>----</b> 
+                       <b>--</b> 
                     @endif      
                 </td>  
                 @endforeach

@@ -50,38 +50,30 @@ class ExportController extends Controller
         $filename=$college->name." - Report";
         $sheetname=$college->name;
 
-        // $count=count($students);
+        foreach($students as $student){
 
-        
-
-        // for($i=0; $i < 1 ; $i++ )
-        // {
+            $subresult =collect();
             
-        //   $par_events = EventStudent::where('student_id',$students[$i]->id)->get();
-          
-        //    if( $par_events[$i]->event_id == $events[$i]->id )
-        //    {
-        //        $flag[$i]=true;
-        //    }
-        //    else
-        //    {
-        //        $flag[$i]=false;
-        //    }
-        
-           
-        // }
-        // dd($flag);
-        // json_encode(['id' => 1, 'name' => 'User 1']);
+            $eventstudents=EventStudent::where('student_id',$student->id)->get();
+
+            foreach($eventstudents as $eventstudent){
+
+                $subresult->push($eventstudent->event_id);
+
+            }
+            
+            $student->events=$subresult;
+        }
+    
         $data=[
             'students' => $students,
             'college' => $college,
             'events' => $events,
             
         ];
-        // dd($data['events'][0]->id);
-        // dd($data['par_events']);
-        // dd($data['students']);
-        return view('exports.registration-form',compact('data'));
+
+        // return view('exports.registration-form',compact('data'));
+
         Excel::create($filename, function($excel) use($filename, $sheetname, $data){
             $myData = $data;
             $excel->sheet($sheetname, function($sheet) use($myData){
@@ -91,4 +83,31 @@ class ExportController extends Controller
         
 
     }
+
+    // public function student($id)
+    // {
+    
+    //     $students=Student::where('college_id',$id)->get();
+    //     $college=College::where('user_id',$id)->first();
+    //     $events=Events::all();
+
+        
+    //     // foreach($students as $student){
+
+    //     //     $subresult =collect();
+            
+    //     //     $eventstudents=EventStudent::where('student_id',$student->id)->get();
+
+    //     //     foreach($eventstudents as $eventstudent){
+
+    //     //         $subresult->push($eventstudent->event_id);
+
+    //     //     }
+            
+    //     //     $student->events=$subresult;
+    //     // }
+    //     // return view('exports.registration-form',compact('students'));
+
+        
+    // }
 }
