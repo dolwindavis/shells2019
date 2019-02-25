@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Events;
 use App\Helpers\Helper;
+use App\Models\College;
 use App\Models\Student;
 use App\Models\EventStudent;
 use Illuminate\Http\Request;
@@ -141,8 +142,15 @@ class ViewController extends Controller
 
     public function college_reports()
     {
+        $colleges=College::all();
+        // dd($colleges);
+        return view('exports.college-reports',compact('colleges'));
+    }
 
-        return view('college-reports');
+    public function event_reports()
+    {
+        $events=Events::all();
+        return view('exports.event-reports',compact('events'));
     }
 
 

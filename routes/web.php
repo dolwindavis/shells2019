@@ -149,7 +149,8 @@ Route::get('/notify','NotificationController@NewsNotification');
 
 
 // reoute to reports
-Route::get('/college-reports','ViewController@college_reports');
+Route::get('/admin/college-reports','ViewController@college_reports');
+Route::get('/admin/event-reports','ViewController@event_reports');
 
 //excel report for event table
 Route::get('eventdetails/{id}','ExportController@event_details');
