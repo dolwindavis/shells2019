@@ -158,7 +158,7 @@
 
                   <button class="btn btn-icon btn-3 btn-primary" type="button" >
                         
-                     <span class="btn-inner--text">Submit</span>
+                     <span class="btn-inner--text">Next</span>
                     
                   </button>
 

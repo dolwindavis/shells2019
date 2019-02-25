@@ -55,6 +55,16 @@ Route::get('/admin/home',function ()
 {
     return view('adminhome');
 });
+
+Route::get('admin/result/publish', function()
+{
+    return view('resultpublish');
+});
+
+Route::get('/results', function()
+{
+    return view('results');
+});
 // Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
 
 // Route::post('/news/add','HomeController@newsRegister');
