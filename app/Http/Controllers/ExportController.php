@@ -24,7 +24,7 @@ class ExportController extends Controller
         // $count=count($event->eventstudent);
 
         $count=$eventstudent->count();
-        
+
         $students=[];
 
         $j=0;
@@ -64,7 +64,7 @@ class ExportController extends Controller
         $events=Events::all();
        
         $filename=$college->name." - Report";
-        $sheetname=$college->name;
+        $sheetname=$college->id;
 
         foreach($students as $student){
 
