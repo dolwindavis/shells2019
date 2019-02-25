@@ -51,6 +51,10 @@ Route::get('/news/trailer',function ()
 
 });
 
+Route::get('/admin/home',function ()
+{
+    return view('adminhome');
+});
 // Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
 
 // Route::post('/news/add','HomeController@newsRegister');
@@ -142,6 +146,11 @@ Route::get('event/{slug}','ViewController@eventdetailsView');
 
 
 Route::get('/notify','NotificationController@NewsNotification');
+
+
+// reoute to reports
+Route::get('/admin/college-reports','ViewController@college_reports');
+Route::get('/admin/event-reports','ViewController@event_reports');
 
 //excel report for event table
 Route::get('eventdetails/{id}','ExportController@event_details');

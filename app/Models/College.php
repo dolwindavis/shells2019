@@ -22,7 +22,7 @@ class College extends Model
 
     public function studentDetails()
     {
-        return $this->hasMany('App\Models\Student','id');
+        return $this->hasMany('App\Models\Student','college_id');
     }
 
     public function insertCollege($request,$user)
