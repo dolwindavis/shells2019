@@ -14,15 +14,22 @@ class Student extends Model
    ];
 
    //one to many relationship with user
-   public function user()
+   public function userDetails()
    {
-       return $this->belongsTo('App\Models\User','id');
+       return $this->belongsTo('App\Models\User','college_id');
    }
 
    public function eventstudent()
    {
         return $this->hasMany('App\Models\EventStudent','student_id');
    }
+   
+
+   public function collegeDetails()
+   {
+    return $this->belongsTo('App\Models\College','college_id');
+   }
+
 
     //register a student;
     public function registerStudent($request,$user)
