@@ -2,7 +2,7 @@
 @section('title','SHELLS2k19 | Contact')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid p-0" style="margin-top:6rem;">
   <div class="row text-center">
     <div class="col-md-12">
       <h2>Contact Us</h2>

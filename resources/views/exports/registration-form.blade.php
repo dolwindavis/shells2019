@@ -55,9 +55,7 @@
                     @endif
                     
                     @endforeach
-
-                   
-
+                    
                 </td>  
                 @endforeach
             </tr>
