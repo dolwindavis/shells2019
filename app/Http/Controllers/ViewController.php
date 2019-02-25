@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Events;
 use App\Helpers\Helper;
 use App\Models\College;
@@ -109,7 +110,7 @@ class ViewController extends Controller
 //         // dd($result);
 //         return view('eventlist',compact('events'));
         $results=$helper->eventRegisterDetails();
-        
+
         return view('eventlist',compact('events','results'));
     }
 
@@ -143,6 +144,21 @@ class ViewController extends Controller
     public function college_reports()
     {
         $colleges=College::all();
+
+        foreach($colleges as $college){
+            $student=$college->studentDetails();
+
+            $count =$student->count();
+
+            $coding =EventStudent::where([['college_id',$college->id],['event_id','3']])->count();
+
+            $college->studentfee=$count*100;
+
+            $college->codingfee=$coding*200;
+
+            $college->totalfee=$college->studentfee+$college->codingfee;
+
+        }
         // dd($colleges);
         return view('exports.college-reports',compact('colleges'));
     }
@@ -151,6 +167,34 @@ class ViewController extends Controller
     {
         $events=Events::all();
         return view('exports.event-reports',compact('events'));
+    }
+
+    public function collegeDelete(Request $request){
+
+        $collegeid=$request->collegeid;
+
+        DB::beginTransaction();
+
+        try{
+            $eventstudent=EventStudent::where('college_id',$collegeid)->delete();
+
+            $student=Student::where('college_id',$collegeid)->delete();
+
+            $college=College::where('user_id',$collegeid)->delete();
+
+            $user=User::where('id',$collegeid)->delete();
+            DB::commit();
+        }
+        catch(Exception $e){
+
+            //rollback the transactions if any error occur
+            DB::rollBack();
+            return back();
+
+        }
+
+        return back();
+
     }
 
 

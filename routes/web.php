@@ -50,18 +50,32 @@ Route::get('/news/trailer',function ()
     return view('news');
 
 });
+Route::middleware(['auth','admin'])->group(function () {
 
 Route::get('/admin/home',function ()
 {
     return view('adminhome');
+})->middleware('auth','admin');
+
+
+// reoute to reports
+Route::get('/admin/college-reports','ViewController@college_reports');
+Route::get('/admin/event-reports','ViewController@event_reports');
+
+Route::post('/admin/college/delete','ViewController@collegeDelete');
+
+//excel report for event table
+Route::get('eventdetails/{id}','ExportController@event_details');
+Route::get('registration-form/{id}','ExportController@registration_form');
+
+
+Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
+
+Route::post('/news/add','HomeController@newsRegister');
+
+Route::get('/news/{slug}','HomeController@newsSlugView');
+
 });
-// Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
-
-// Route::post('/news/add','HomeController@newsRegister');
-
-// Route::get('/news/{slug}','HomeController@newsSlugView');
-
-
 
 
 
@@ -148,12 +162,8 @@ Route::get('event/{slug}','ViewController@eventdetailsView');
 Route::get('/notify','NotificationController@NewsNotification');
 
 
-// reoute to reports
-Route::get('/admin/college-reports','ViewController@college_reports');
-Route::get('/admin/event-reports','ViewController@event_reports');
 
-//excel report for event table
-Route::get('eventdetails/{id}','ExportController@event_details');
-Route::get('registration-form/{id}','ExportController@registration_form');
+
+
 // Route::get('registration-form/{id}','ExportController@student');
 
