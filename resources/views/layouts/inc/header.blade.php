@@ -38,7 +38,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('student') }}">Student Registration</a>
-            <!--<a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('events/register') }}">Event Registration</a>--> 
+            <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('events/register') }}">Event Registration</a> 
             <a class="dropdown-item" href="{{ url('logout') }}" >Logout</a>
           </div>
         </li>

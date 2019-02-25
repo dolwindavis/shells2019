@@ -152,7 +152,7 @@ class ViewController extends Controller
 
             $coding =EventStudent::where([['college_id',$college->id],['event_id','3']])->count();
 
-            $college->studentfee=$count*100;
+            $college->studentfee=$count*120;
 
             $college->codingfee=$coding*200;
 

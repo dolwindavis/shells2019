@@ -112,11 +112,11 @@ Route::middleware(['auth','admin'])->group(function () {
 
 Route::post('/register','RegisterController@registerCollege'); 
 
-Route::get('/event/add',function ()
-{
-    return view('eventadd');
+// Route::get('/event/add',function ()
+// {
+//     return view('eventadd');
 
-});
+// });
 
 // Route::post('/event/add','RegisterController@eventRegister');
 
