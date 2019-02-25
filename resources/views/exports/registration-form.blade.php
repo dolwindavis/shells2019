@@ -36,7 +36,7 @@
     
         <tbody>
             @php
-              $i=1;$j=0;  
+              $i=1;$j=0;$flag=0;  
             @endphp
        @foreach($data['students'] as $key => $student )
             <tr>
@@ -45,12 +45,19 @@
                 {{-- <td>{{ $student->events->first() }}</td> --}}
                 @foreach ( $data['events'] as $event )
                   <td>
-                      
-                 @if ($event->id == $student->events->first())
-                  <b>yes</b> 
-                    @else
-                       <b>--</b> 
-                    @endif      
+                    @foreach ($student->events as $studentevent)
+                   
+                    @if ($event->id == $studentevent)
+                    @php
+                        echo "<b>yes</b>";
+                       break; 
+                    @endphp
+                    @endif
+                    
+                    @endforeach
+
+                   
+
                 </td>  
                 @endforeach
             </tr>
