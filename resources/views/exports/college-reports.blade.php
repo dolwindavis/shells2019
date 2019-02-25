@@ -35,7 +35,7 @@
                               <h5 class="card-title text-uppercase text-muted mb-0">Participant  List</h5>
                               <ol>
                                 @foreach ($college->studentDetails as $student)
-                                <li>{{ $student->name }}</li>
+                                <li>{{ $student->name.' => '.$student->reg_no }}</li>
                                 @endforeach
                                   
                               </ol>
@@ -44,7 +44,7 @@
                       <div class="row pt-2">
                             <div class="col">
                               <h5 class="card-title text-uppercase text-muted mb-0">Fees</h5>
-                              <span class="text-success mr-2">Rs. 3.48</span>
+                              <span class="text-success mr-2">Rs{{ $college->studentfee }} + Rs{{ $college->codingfee }} = {{ $college->totalfee }} </span>
                             </div>
                       </div>
                       <div class="row pt-2">
@@ -52,8 +52,10 @@
                             <a href="/registration-form/{{$college->id}}" class="btn btn-lg btn-success"> Download Excel</a>
                             </div>
                             <div class="col">
-                              <form action="" method="">
-                                <button class="btn btn-lg btn-danger"> <i class="fa fa-trash"></i> </button> 
+                              <form action="/admin/college/delete" method="post">
+                              @csrf 
+                                <input type="hidden" value="{{$college->id}}" name="collegeid">
+                                <button type="submit" class="btn btn-lg btn-danger"> <i class="fa fa-trash"></i> </button> 
                               </form>
                             </div>
                       </div>

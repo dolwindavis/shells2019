@@ -95,18 +95,18 @@ class EventController extends Controller
         }
 
         //checking a student eligible for ragistering
-        // for($i=0;$i<= count($studentid)-1;$i++){
+        for($i=0;$i<= count($studentid)-1;$i++){
 
-        //     $eventstudent=EventStudent::where([['student_id',$studentid[$i] ],['event_id',$eventid]])->get();
+            $eventstudent=EventStudent::where([['student_id',$studentid[$i] ],['event_id',$eventid]])->get();
 
-        //     //checking for exclusive event validation
-        //     if($event->exclusive == '1' && $eventstudent->isNotEmpty()){
+            //checking for exclusive event validation
+            if($eventstudent->isNotEmpty()){
 
-        //         return response('exclusive event validation');
+                return response('exclusive event validation');
 
-        //     }
+            }
 
-        // }
+        }
 
         $eventstudent=EventStudent::where([['college_id',$user->id],['event_id',$eventid]])->get();
  
@@ -231,18 +231,19 @@ class EventController extends Controller
         }
 
         //checking a student eligible for ragistering
-        // for($i=0;$i<= count($studentid)-1;$i++){
+        for($i=0;$i<= count($studentid)-1;$i++){
 
-        //     $eventstudent=EventStudent::where([['student_id',$studentid[$i] ],['event_id',$eventid]])->get();
+            $eventstudent=EventStudent::where([['student_id',$studentid[$i] ],['event_id',$eventid]])->get();
 
-        //     //checking for exclusive event validation
-        //     if($eventstudent->isNotEmpty()){
+            //checking for exclusive event validation
+            if($eventstudent->isNotEmpty()){
 
-        //         return redirect()->back();
+                session()->flash('same','Success');
+                return back();
 
-        //     }
+            }
 
-        // }
+        }
 
         $eventstudent=EventStudent::where([['college_id',$user->id],['event_id',$eventid],['group_id',$groupid]])->get();
         

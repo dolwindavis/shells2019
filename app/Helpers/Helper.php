@@ -125,15 +125,16 @@ class Helper
 
         foreach($events as $key => $event){
 
-            $subresult =collect();
+            if($event->groupevent == 1){
+                $subresult =collect();
 
-            $students = collect();
+                $students = collect();
+            }
             foreach($eventstudents as $key => $eventstudent){
-
                 
                 if($event->id == $eventstudent->event_id){
 
-                    // if($event->groupevent == 1){
+                    if($event->groupevent == 1){
                         $substudent = collect();
 
                         $student = Student::find($eventstudent->student_id);
@@ -142,21 +143,43 @@ class Helper
                         $substudent->id = $student->id;
                         $students->push($substudent);
                         $subresult->groupid=$eventstudent->group_id;
-                    // }
+                    }
+                    else{
+                        $subresult =collect();
+
+                        $students = collect();
+                        $substudent = collect();
+
+                        $student = Student::find($eventstudent->student_id);
+                       
+                        $substudent->name = $student->name;
+                        $substudent->id = $student->id;
+                        $students->push($substudent);
+                        $subresult->groupid=$eventstudent->group_id;
+                        $subresult->eventname =$event->name;
+                        $subresult->eventlogo=$event->logo;
+                        $subresult->eventinfo=$event->info;
+                        $subresult->eventid=$event->id;
+                        $subresult->students=$students;
+                        $result->push($subresult);
+                        
+                    }
 
                 }
             }
-            if($students->isEmpty()){
+            if($event->groupevent == 1){
+                if($students->isEmpty()){
 
-                continue;
+                    continue;
 
+                }
+                $subresult->eventname =$event->name;
+                $subresult->eventlogo=$event->logo;
+                $subresult->eventinfo=$event->info;
+                $subresult->eventid=$event->id;
+                $subresult->students=$students;
+                $result->push($subresult);
             }
-            $subresult->eventname =$event->name;
-            $subresult->eventlogo=$event->logo;
-            $subresult->eventinfo=$event->info;
-            $subresult->eventid=$event->id;
-            $subresult->students=$students;
-            $result->push($subresult);
         }
         return $result;
     }
