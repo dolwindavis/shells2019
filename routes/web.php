@@ -42,7 +42,10 @@ Route::get('/schedule','HomeController@scheduleViewer');
 //Results
 Route::get('/results/add','ResultController@resultRegisterView');
 
-Route::get('/news',function ()
+
+//news
+
+Route::get('/news/trailer',function ()
 {
     return view('news');
 
@@ -52,6 +55,16 @@ Route::get('/admin/home',function ()
 {
     return view('adminhome');
 });
+// Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
+
+// Route::post('/news/add','HomeController@newsRegister');
+
+// Route::get('/news/{slug}','HomeController@newsSlugView');
+
+
+
+
+
 
 //Controller => RegisterController
 //Registering a college 
@@ -134,5 +147,12 @@ Route::get('event/{slug}','ViewController@eventdetailsView');
 
 Route::get('/notify','NotificationController@NewsNotification');
 
+
 // reoute to reports
 Route::get('/college-reports','ViewController@college_reports');
+
+//excel report for event table
+Route::get('eventdetails/{id}','ExportController@event_details');
+Route::get('registration-form/{id}','ExportController@registration_form');
+// Route::get('registration-form/{id}','ExportController@student');
+
