@@ -18,6 +18,7 @@
 <link href="{{asset('css/home.css')}}" rel="stylesheet" />
 
 <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
+<script charset="UTF-8" src="//cdn.sendpulse.com/js/push/7275415d335ac4ce625dba3b319aeb56_0.js" async></script>
 
   <!--font awesome icon -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">

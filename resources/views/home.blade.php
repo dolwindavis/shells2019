@@ -57,8 +57,8 @@
 
 
         <div class="news" style="border-bottom: solid 1px #ddd;">
-          <a href="#" style="text-decoration: none; color: #565656;">
-            <h4 style="font-family: Times New Roman; font-weight: 900; margin-bottom: 2px; line-height: 20px; margin-top: 2px;">Shells 2K19 Trailer watch for more information</h4>
+          <a href="{{ url('news/trailer') }}" style="text-decoration: none; color: #565656;">
+            <h4 style="font-family: Times New Roman; font-weight: 900; margin-bottom: 2px; line-height: 20px; margin-top: 2px;">SHELLS 2K19 TRAILER OUT</h4>
             <p style="margin-top: -8px;">25/2/2019</p>
           </a>
         </div>

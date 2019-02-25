@@ -20,6 +20,11 @@ class College extends Model
         return $this->belongsTo('App\Models\User','id');
     }
 
+    public function studentDetails()
+    {
+        return $this->hasMany('App\Models\Student','college_id');
+    }
+
     public function insertCollege($request,$user)
     {
         // $newcollege =new College;
