@@ -139,5 +139,11 @@ class ViewController extends Controller
         return view('student_event');
     }
 
+    public function college_reports()
+    {
+
+        return view('college-reports');
+    }
+
 
 }

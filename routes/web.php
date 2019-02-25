@@ -135,7 +135,4 @@ Route::get('event/{slug}','ViewController@eventdetailsView');
 Route::get('/notify','NotificationController@NewsNotification');
 
 // reoute to reports
-Route::get('/reports',function(){
-
-    return view('reports');
-});
+Route::get('/college-reports','ViewController@college_reports');
