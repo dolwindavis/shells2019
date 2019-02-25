@@ -10,7 +10,7 @@
     <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/bg.jpg" width="100%" height="100%" style="object-fit: cover;">
   <!-- </div> -->
 </div>
-<div class="container text-center card-3 border-r-sm" id="card-sign-in">
+<div class="container text-center card-3 border-r-sm " id="card-sign-in">
   <div class="row text-center p-3" >
       <div class="col-md-12 p-2">
     <h3><strong >SIGN IN</strong></h3>

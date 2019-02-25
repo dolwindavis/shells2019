@@ -17,9 +17,10 @@
     <img src="https://s3.ap-south-1.amazonaws.com/shells2k19/website/images/80910.jpg" style="object-fit: cover; object-position: bottom;" height="100%" width="100%">    
   </div>
 </div>
-<div class="col-md-4 container text-center card-3 border-r-sm" id="card-sign-in">
-  <div class="row text-center p-3" >
-      <div class="col-md-12 p-2">
+
+<div class="col-10 col-md-4  container text-center p-2 card-3 border-r-sm drop-shadow " id="card-sign-in" >
+  <div class="row text-center p-2" >
+      <div class="col-md-12 ">
     <h3><strong >SIGN IN</strong></h3>
   </div>
   </div>
@@ -49,5 +50,4 @@
 
 <!--end of the form -->
 </div>
-
 @endsection
