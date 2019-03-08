@@ -64,7 +64,6 @@ class ExportController extends Controller
         $students=Student::where('college_id',$id)->get();
         $college=College::where('user_id',$id)->first();
         $events=Events::all();
-       
         $filename=$college->name." - Report";
         // $sheetname=$college->id;
         $sheetname="Report";

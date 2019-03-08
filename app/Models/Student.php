@@ -27,7 +27,7 @@ class Student extends Model
 
    public function collegeDetails()
    {
-    return $this->belongsTo('App\Models\College','college_id');
+    return $this->belongsTo('App\Models\College','college_id','user_id');
    }
 
 

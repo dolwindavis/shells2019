@@ -17,12 +17,12 @@ class College extends Model
     //one to one relationship with user
     public function user()
     {
-        return $this->belongsTo('App\Models\User','id');
+        return $this->belongsTo('App\Models\User','user_id');
     }
 
     public function studentDetails()
     {
-        return $this->hasMany('App\Models\Student','college_id');
+        return $this->hasMany('App\Models\Student','college_id','user_id');
     }
 
     public function insertCollege($request,$user)

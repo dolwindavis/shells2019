@@ -49,7 +49,7 @@
                       </div>
                       <div class="row pt-2">
                             <div class="col">
-                            <a href="/registration-form/{{$college->id}}" class="btn btn-lg btn-success"> Download Excel</a>
+                            <a href="/registration-form/{{$college->user->id}}" class="btn btn-lg btn-success"> Download Excel</a>
                             </div>
                             <div class="col">
                               <form action="/admin/college/delete" method="post">

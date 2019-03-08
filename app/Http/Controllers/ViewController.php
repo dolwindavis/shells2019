@@ -158,8 +158,10 @@ class ViewController extends Controller
 
             $college->totalfee=$college->studentfee+$college->codingfee;
 
+
         }
-        // dd($colleges);
+
+
         return view('exports.college-reports',compact('colleges'));
     }
 
