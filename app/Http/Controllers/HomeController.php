@@ -67,6 +67,10 @@ class HomeController extends Controller
 
     public function newsRegister(Request $request)
     {
+        if(!$request->body||!$request->title||!$request->date){
+
+            return back();
+        }
         
         $body=$request->body;
 

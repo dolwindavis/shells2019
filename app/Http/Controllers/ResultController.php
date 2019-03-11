@@ -17,6 +17,9 @@ class ResultController extends Controller
     public function resultRegisterView(Request $request)
     {   
 
+        if(!$request->no || !$request->round){
+            return back();
+        }
         $eventid=$request->eventid;
         $event=Events::where('id',$eventid)->first();
         $round=$request->round;
