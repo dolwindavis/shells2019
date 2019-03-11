@@ -132,7 +132,7 @@ class EventController extends Controller
             return back();
 
         }
-        elseif(count($studentid) !== count(array_unique($studentid))){
+        elseif(count($studentid) != count(array_unique($studentid))){
 
             session()->flash('same','Success');
             return back();
@@ -260,7 +260,7 @@ class EventController extends Controller
             return back();
 
         }
-        elseif(count($studentid) !== count(array_unique($studentid))){
+        elseif(count($studentid) != count(array_unique($studentid))){
 
             session()->flash('same','Success');
             return back();

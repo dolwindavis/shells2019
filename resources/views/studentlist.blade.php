@@ -54,6 +54,30 @@ Swal.fire(
 'error'
 )
 </script>
+@elseif(session('nostudents'))
+<script>
+Swal.fire(
+'No Fee Is Pending!',
+'please add new students or events!',
+'error'
+)
+</script>
+@elseif(session('payment'))
+<script>
+Swal.fire(
+'No Fee Is Pending!',
+'Already Payment Done!',
+'error'
+)
+</script>
+@elseif(session('locked'))
+<script>
+Swal.fire(
+'Registration Locked!',
+'After Payment Registration Will Be Locked!',
+'error'
+)
+</script>
 @endif
 <!--<div class="container-fluid mb-5 " style="margin-top: 100px; ">
   <h3 class="p-5">Student's Registered</h3>
@@ -129,7 +153,7 @@ Swal.fire(
 <!-- Student Card End -->
    
     <!-- student list add-->
-    
+    @if(Auth::user()->payment == 0)
     <div class="col-md-4 mt-2 card-1 border-r-sm bg-st-li" style="max-width:360px !important; color: #565656;">
       <div class="text-center p-5">
         <a href="{{ url('student/register')}}">
@@ -138,7 +162,7 @@ Swal.fire(
         </a>
       </div>
     </div>
-
+  @endif
 
   </div>
   </div>

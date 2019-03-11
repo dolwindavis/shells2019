@@ -16,7 +16,8 @@
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "maatwebsite/excel": "^2.1",
-        "pusher/pusher-php-server": "^3.3"
+        "pusher/pusher-php-server": "^3.3",
+        "stripe/stripe-php": "^6.30"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -24,7 +25,8 @@
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^7.0",
+        "cartalyst/stripe-laravel": "9.0.*"
     },
     "config": {
         "optimize-autoloader": true,

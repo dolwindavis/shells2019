@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Events;
+use App\Models\College;
+use App\Models\Student;
 
 
 
@@ -15,9 +17,11 @@ use App\Models\Events;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/','ViewController@homeview');
+
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 //Controller => ViewController
 //Rendering Views
@@ -56,30 +60,18 @@ Route::get('/news/trailer',function ()
 
 Route::get('/news/{slug}','HomeController@newsSlugView');
 
-Route::get('/admin/home',function ()
-{
-    return view('adminhome');
-});
 
-Route::get('admin/result/publish', function()
-{
-    return view('resultpublish');
-});
 
-Route::get('/results', function()
-{
-    return view('results');
-});
-// Route::get('/news/add','HomeController@newsView')->middleware('auth','admin');
-
+Route::get('/results','ResultController@resultView');
 
 Route::middleware(['auth','admin'])->group(function () {
 
     Route::get('/admin/home',function ()
     {   
         $events=Events::select('name','id')->get();
-        
-        return view('adminhome',compact('events'));
+        $college=College::all()->count();
+        $student=Student::all()->count();
+        return view('adminhome',compact('events','college','student'));
     });
 
 
@@ -100,6 +92,9 @@ Route::middleware(['auth','admin'])->group(function () {
 
     Route::post('/result/register','ResultController@resultRegisterView');
 
+    Route::post('admin/result/publish','ResultController@resultRegister');
+
+   Route::post('admin/payment','ViewController@adminPayment');
 
 
 });
@@ -137,10 +132,10 @@ Route::middleware(['auth'])->group(function () {
     //Route::get('/student','ViewController@studentlistView');
     Route::get('/student','DataViewController@studentDetails');
 
-    Route::get('/student/register','ViewController@studentAddView');
+    Route::get('/student/register','ViewController@studentAddView')->middleware('payment');
 
     //registering a student
-    Route::post('/student/register','RegisterController@registerStudent');
+    Route::post('/student/register','RegisterController@registerStudent')->middleware('payment');
 
     //editing student view
     Route::get('/student/edit/{studentid}','ViewController@editStudentView');
@@ -149,7 +144,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/student/edit/{studentid}','RegisterController@studentUpdate');
 
     //deleting student
-    Route::get('/student/delete/{studentid}','RegisterController@studentDelete');
+    Route::get('/student/delete/{studentid}','RegisterController@studentDelete')->middleware('payment');
 
     
 
@@ -162,16 +157,21 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/student/event/register','EventController@eventRegister');//[request=>id,studentid[],eventid response=>true]
 
-    Route::get('/student/register/event','EventController@eventDetails');
+    Route::get('/student/register/event','EventController@eventDetails')->middleware('payment');
 
-    Route::get('/student/event/edit','EventController@eventEditView');
+    Route::get('/student/event/edit','EventController@eventEditView')->middleware('payment');
 
-    Route::post('/student/event/edit','EventController@eventEdit');
+    Route::post('/student/event/edit','EventController@eventEdit')->middleware('payment');
 
-    Route::post('/student/event/delete','EventController@eventDelete');
+    Route::post('/student/event/delete','EventController@eventDelete')->middleware('payment');
+    
     //test route 
     Route::get('/student/event','ViewController@addEvent');
 
+
+    Route::get('payment/stripe', array('as' => 'addmoney.paystripe','uses' => 'MoneySetupController@PaymentStripe'));
+
+    Route::post('addmoney/stripe', array('as' => 'addmoney.stripe','uses' => 'MoneySetupController@postPaymentStripe'));
    
 });
 

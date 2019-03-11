@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\User;
 use App\Models\Events;
 use App\Helpers\Helper;
@@ -15,7 +16,16 @@ use Illuminate\Support\Facades\Auth;
 class ViewController extends Controller
 {
     function homeView() {
-        return view('home');
+
+        
+        if(Auth::user() &&  Auth::user()->username == 'admin'){
+
+           return  redirect('/admin/home');
+
+        }
+        $news = News::latest()->get();
+        
+        return view('home',compact('news'));
     }
 
     function loginView() {
@@ -146,11 +156,12 @@ class ViewController extends Controller
         $colleges=College::all();
 
         foreach($colleges as $college){
+
             $student=$college->studentDetails();
 
             $count =$student->count();
 
-            $coding =EventStudent::where([['college_id',$college->id],['event_id','3']])->count();
+            $coding =EventStudent::where([['college_id',$college->user_id],['event_id','3']])->count();
 
             $college->studentfee=$count*120;
 
@@ -158,6 +169,7 @@ class ViewController extends Controller
 
             $college->totalfee=$college->studentfee+$college->codingfee;
 
+            $college->payment=User::where('id',$college->user_id)->value('payment');
 
         }
 
@@ -199,5 +211,17 @@ class ViewController extends Controller
 
     }
 
+    public function adminPayment(Request $request)
+    {
+        $userid=$request->userid;
+
+        $user=User::where('id',$userid)->first();
+
+        $user->payment=1;
+
+        $user->save();
+
+        return back()->with('sucess','sucess');
+    }
 
 }

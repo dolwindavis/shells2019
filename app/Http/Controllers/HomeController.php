@@ -88,15 +88,12 @@ class HomeController extends Controller
 
         $news->save();
 
-        session()->flash('sucess','Success');
-        return back();
+        return back()->with('sucess','sucesss');
     }
 
     public function newsSlugView(Request $request,$slug)
     {
         $news=News::where('slug',$slug)->first();
-
-        dd($news);
 
         return View('news-template',compact('news'));
     }
