@@ -11,6 +11,7 @@ use App\Http\Requests;
 use Stripe\Error\Card;
 use App\Models\College;
 use App\Models\Payment;
+use PDF;
 use App\Models\EventStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,7 +101,45 @@ class MoneySetupController extends Controller
 
 		$user->save();
 		
-        return redirect('/student');
-        
+		$this->invoiceDownload($user,$college->studentfee,$college->codingfee);
+
+		return redirect('/student');
+		
+	 }
+
+	 public function invoiceDownload(Request $request)
+	 {
+		$user=Auth::user(); 
+		
+		if($user->payment == 0)
+			return back();
+			
+		$college=College::where('user_id',$user->id)->first();
+
+		$student=$college->studentDetails();
+
+		$count =$student->count();
+
+		$coding =EventStudent::where([['college_id',$college->id],['event_id','3']])->count();
+
+		$studentfee=$count*120;
+
+		$codingfee=$coding*200;
+
+		$data = [
+
+			'name' => $college->name,
+			'phone' => $college->phone_no,
+			'email' => $user->email,
+			'username' =>$user->username,
+			'date' =>  date('dd-mm-YY'),
+			'studentfee' => $studentfee,
+			'codingfee' => $codingfee		
+		];
+		
+		$pdf = PDF::loadView('invoice',compact('data'));
+		
+        return $pdf->download('results.pdf'); 
+
 	 }
 }

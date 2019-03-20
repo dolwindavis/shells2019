@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         NotificationChannels\OneSignal\OneSignalServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -229,6 +230,7 @@ return [
         'OneSignal'=>NotificationChannels\OneSignal\OneSignalServiceProvider::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

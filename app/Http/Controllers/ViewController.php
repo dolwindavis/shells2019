@@ -197,6 +197,7 @@ class ViewController extends Controller
             $college=College::where('user_id',$collegeid)->delete();
 
             $user=User::where('id',$collegeid)->delete();
+            
             DB::commit();
         }
         catch(Exception $e){

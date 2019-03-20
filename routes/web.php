@@ -190,7 +190,7 @@ Route::get('event/{slug}','ViewController@eventdetailsView');
 Route::get('/notify','NotificationController@NewsNotification');
 
 
-
+Route::get('/invoice','MoneySetupController@invoiceDownload');
 
 
 // Route::get('registration-form/{id}','ExportController@student');

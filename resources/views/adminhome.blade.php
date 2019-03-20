@@ -244,9 +244,17 @@ Swal.fire(
                     </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="text" placeholder="Date" class="form-control" name="date"/>
+                              <div class="form-group">
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    </div>
+                                    <input class="form-control datepicker" placeholder="Select date" type="text" value="{{ date('d-m-Y')}}" name="date">
+                                </div>
                         </div>
+                        <!--<div class="form-group">
+                            <input type="text" placeholder="Date" class="form-control" name="date"/>
+                        </div>-->
                     </div> 
                     <div class="col-md-12">
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Markup" name="body"></textarea>              

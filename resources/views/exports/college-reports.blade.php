@@ -101,7 +101,7 @@ function confirmation(event){
                             <div class="col">
                               <form action="/admin/college/delete" method="post">
                               @csrf 
-                                <input type="hidden" value="{{$college->id}}" name="collegeid">
+                                <input type="hidden" value="{{$college->user_id}}" name="collegeid">
                                 <button type="submit" class="btn btn-lg btn-danger"> <i class="fa fa-trash"></i> </button> 
                               </form>
                             </div>
