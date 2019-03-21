@@ -101,7 +101,7 @@ class MoneySetupController extends Controller
 
 		$user->save();
 		
-		$this->invoiceDownload($user,$college->studentfee,$college->codingfee);
+		// $this->invoiceDownload($user,$college->studentfee,$college->codingfee);
 
 		return redirect('/student');
 		
@@ -139,7 +139,7 @@ class MoneySetupController extends Controller
 		
 		$pdf = PDF::loadView('invoice',compact('data'));
 		
-        return $pdf->download('results.pdf'); 
+        return $pdf->download('Shells2k19Invoice.pdf'); 
 
 	 }
 }
