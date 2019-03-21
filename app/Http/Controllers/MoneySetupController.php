@@ -18,6 +18,16 @@ use Illuminate\Support\Facades\Auth;
 
 class MoneySetupController extends Controller
 {
+	 /**
+     * Rendering a Pyment View  
+	 * it COntais Two types of Fee 
+	 * Fee For Participants
+	 * Fee For Coding Event
+     *
+     * @params 
+     * 
+     * @return  View
+     */
 	 public function paymentStripe()
 	 {
 		$user=Auth::user();
@@ -52,6 +62,15 @@ class MoneySetupController extends Controller
 
 	 	return view('stripe',compact('college'));
 	 }
+
+	/**
+     *  creating a payment for the College 
+	 * 
+     *
+     * @params stripeTOken
+     * 
+     * @return  View
+     */
 	public function postPaymentStripe(Request $request)
 	 {
 
@@ -71,10 +90,13 @@ class MoneySetupController extends Controller
 
 		$college->totalfee=$college->studentfee+$college->codingfee;
 
+		//creating a Stripe Object
 	 	$stripe=Stripe::setApiKey(env('STRIPE_SECRET'));
 
+		 //retieving stripe token details which created from client
 		$token = $stripe->tokens()->find($request->stripeToken);
 
+		//creating a stripe charge
 	 	$charge = $stripe->charges()->create([
 
 				 'card' => $token['id'],
@@ -85,6 +107,7 @@ class MoneySetupController extends Controller
 
 			]);
 		
+		//Registering the Payment in the System
 		$payment = new Payment;
 
 		$payment->tokenid = $token['id'];
@@ -101,14 +124,20 @@ class MoneySetupController extends Controller
 
 		$user->save();
 		
-		// $this->invoiceDownload($user,$college->studentfee,$college->codingfee);
-
 		return redirect('/student');
 		
 	 }
 
+	  /**
+     * Invoive Download for the users who pays the fee
+     *
+     * @params Auth::user
+     * 
+     * @return  pdf Download
+     */
 	 public function invoiceDownload(Request $request)
 	 {
+
 		$user=Auth::user(); 
 		
 		if($user->payment == 0)
@@ -137,6 +166,7 @@ class MoneySetupController extends Controller
 			'codingfee' => $codingfee		
 		];
 		
+		//creating a pdf using the html file usind package dompdf
 		$pdf = PDF::loadView('invoice',compact('data'));
 		
         return $pdf->download('Shells2k19Invoice.pdf'); 

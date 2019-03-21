@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\DB;
 
 class ResultController extends Controller
 {
-    
+    /**
+    * Rendering Reuslt Register View Using the details From the Admin View
+    *
+    * @params 
+    * 
+    * @return  View
+    */
     public function resultRegisterView(Request $request)
     {   
 
@@ -26,14 +32,17 @@ class ResultController extends Controller
         $eventtype=$request->eventtype;
         $no=$request->no;
 
+        //checking for eventtype validation
         if(($event->groupevent == 1 && $eventtype!='group')||($event->groupevent == 0 && $eventtype != 'individual')){
 
             return back()->with('event','success');
 
         }
+        //if the event is individual event we have to return student names
         if($eventtype == 'individual'){
 
             $students = EventStudent::where('event_id',$eventid)->get();
+
             foreach($students as $student){
 
                 $student->name=Student::where('id',$student->student_id)->value('name');
@@ -41,9 +50,11 @@ class ResultController extends Controller
             }
 
         }
+        //if the event is group event we have to return group names
         else{
 
             $students=EventStudent::select('group_id')->where('event_id',$eventid)->distinct()->get();
+
             foreach($students as $student){
                 
                 $eventstudent=EventStudent::where('group_id',$student->group_id)->first();
@@ -56,12 +67,19 @@ class ResultController extends Controller
 
     }
 
-
+    /**
+    * Register the Result
+    *
+    * @params 
+    * 
+    * @return  View
+    */
     public function resultRegister(Request $request)
     { 
   
         $studentid=[];
 
+        //using dynamin variable creation for retiriving student id s from the request
         for($i=1;$i<=$request->no;$i++){
 
             $variablename='student'.$i;
@@ -74,17 +92,20 @@ class ResultController extends Controller
 
         }
 
+        //checking the student for repetation of the students
         if(count($studentid) != count(array_unique($studentid))){
 
-            // session()->flash('same','Success');
             return redirect('/admin/home')->with('same','Success');
+
         }
+        //checking the count of the students
         elseif($request->no != (count($studentid))){
 
             return redirect('/admin/home')->with('count','Success');
 
         }
 
+        //starting a databse transaction
         DB::beginTransaction();
 
         try{
@@ -125,6 +146,7 @@ class ResultController extends Controller
                 $resultstudent->save();
             }
             
+            //commiting the changes if no error occured
             DB::commit();
         }
         catch(Exception $e){
@@ -138,7 +160,13 @@ class ResultController extends Controller
 
         return redirect('/admin/home')->with('result','success');
     }
-
+    /**
+    *Showing the results to public
+    *
+    * @params 
+    * 
+    * @return  View
+    */
     public function resultView(Request $request)
     {
         $resultmains=ResultsMain::latest()->get();
@@ -161,16 +189,6 @@ class ResultController extends Controller
 
         return View('results',compact('result'));
    
-    }
-
-    public function registerNews(Request $request)
-    {
-        $body=$request->body;
-
-        $title=$request->title;
-
-        $date=Date.now;
-
     }
 
 }

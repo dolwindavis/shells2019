@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
 
 use App\Models\Events;
@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+
+     /**
+     * Load Event Register Page With Event Partcipants That is eligible for that event
+     *
+     * @Params id=>eventid
+     * 
+     * @return View with details of student and event
+     */
+
     function eventDetails(Request $request)
     {
 
@@ -22,15 +31,22 @@ class EventController extends Controller
 
         $eventid = $request->id;
 
-
         $event=Events::where('id',$eventid)->first();
-
         
         $students=$this->eventParticipant($eventid);
         
         return view('student_event',compact('event','students'));
 
     }
+
+     /**
+     * Sorting the events for this particular event using hELPER CLASS
+     * 
+     *
+     * @Params id=>eventid
+     * 
+     * @return Models/Student Collection
+     */
 
     function eventParticipant($eventid)
     {
@@ -43,25 +59,33 @@ class EventController extends Controller
         
         $helper = new Helper;
 
+        //helper Function call for student sort
         $student = $helper->studentSort($eventid);
 
         return $student;
 
     }
 
-
-    //register an event for the student
+     /**
+     *register an event for the student
+     * 
+     *
+     * @Params eventid,studentid
+     * 
+     * @return View with feedback
+     */
     public function eventRegister(Request $request)
     {
         
-
         $studentid=[];
 
+        //checking whether all the parameters are used
         if(!$request->eventid || $request->groupid){
             
             return back()->with('badrequest', 'success');
 
         }
+
 
         $eventid=$request->eventid;
 
@@ -70,18 +94,25 @@ class EventController extends Controller
         //evennt details
         $event=Events::find($request->eventid);
 
+        //we are creating a dynamic variable which varies in student no
+        //Becuase we are not getting the array of student id
+        //its like student1,student2 etc so  we need to create a dynamic variable to retirieve values
+
+        //check whether the event is group or not
         if($event->groupevent == 1){
 
             for($i=1;$i<=$event->groupnumber;$i++){
 
+                //creating dynamic variable name
                 $variablename='student'.$i;
+
                 if(!$request->$variablename){
 
                     return back()->with('badrequest', 'success');
 
                 }
+                //creating a array of student id
                 $studentid[$i-1]=$request->$variablename;
-
             }
 
         }
@@ -91,6 +122,8 @@ class EventController extends Controller
                 return back()->with('badrequest', 'success');
 
             }
+
+            //hard assigning values to the student array
             $studentid[0]=$request->student1;
         }
 
@@ -132,12 +165,14 @@ class EventController extends Controller
             return back();
 
         }
+        //checcking the posiibility of same participants name in more than one time
         elseif(count($studentid) != count(array_unique($studentid))){
 
             session()->flash('same','Success');
             return back();
         }
 
+        //creating an group id which used to identify a college or student for a partican event
         if($event->groupevent == '1'){
 
             $request->groupid=str_random(6);
@@ -149,10 +184,12 @@ class EventController extends Controller
 
         }
         
+        //registering the event
         for($i=0;$i<=count($studentid)-1;$i++){
 
             $newevent=new EventStudent;
             $request->studentsid=$studentid[$i];
+
             $newevent->registerEventStudent($request);
         }
 
@@ -160,7 +197,14 @@ class EventController extends Controller
         return redirect('/events/register');
 
     }
-
+     /**
+     *rendering a view with registered event details
+     * 
+     *
+     * @Params eventid,studentid
+     * 
+     * @return View with event student details
+     */
     public function eventEditView(Request $request)
     {
 
@@ -168,21 +212,30 @@ class EventController extends Controller
 
             return back()->with('badrequest', 'success');
         }
+
         $studentid=$request->student;
         $eventid=$request->eventid;
         $groupid=$request->groupid;
 
         $event=Events::find($eventid);
+
+        //sorting students
         $helper = new Helper;
 
         $students = $helper->studentSorts($eventid);
-
 
         return view('studenteventedit',compact('event','students','groupid'));
          
     }
 
-
+     /**
+     *aediting an event that is already registered
+     * Documentation is same as registering an event
+     *
+     * @Params eventid,studentid
+     * 
+     * @return View with event student details
+     */
     public function eventEdit(Request $request)
     {   
         
@@ -195,16 +248,13 @@ class EventController extends Controller
 
         }
 
-        // $studentid=$request->studentid;
-
         $eventid=$request->eventid;
+
         $groupid=$request->groupid;
-
-
 
         $user=Auth::user();
 
-        //evennt details
+        //event details
         $event=Events::find($request->eventid);
 
         if($event->groupevent == 1){
@@ -265,11 +315,12 @@ class EventController extends Controller
             session()->flash('same','Success');
             return back();
         }
-
         
+        //editing the event registration
         foreach($eventstudent as $key=> $es){
 
             $es->student_id = $studentid[$key];
+
             $es->save(); 
             
         }
@@ -278,6 +329,15 @@ class EventController extends Controller
         return redirect('/events/register');
         
     }
+
+    /**
+     *Deleting an event that is registered
+     * 
+     *
+     * @Params eventid,groupid
+     * 
+     * @return View 
+     */
     public function eventDelete(Request $request){
 
         if(!$request->eventid || !$request->groupid){
@@ -291,6 +351,7 @@ class EventController extends Controller
         
         $user=Auth::user();
 
+        //deleting an event register
         $events=DB::table('eventstudent')->where([['college_id',$user->id],['event_id',$eventid],['group_id',$groupid]])->delete();
 
         session()->flash('delete','Success');

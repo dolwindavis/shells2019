@@ -9,48 +9,18 @@ use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
+ 
     /**
-     * Create a new controller instance.
+     * Show the Shedule Of the Event 
      *
-     * @return void
+     * @return file that is streamed in the browser
+     * 
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        $s3 = Storage::disk('s3');
-        $image = $s3->url('1548788759.png');
-        return view('welcome',compact('image'));
-    }
-
-    public function s3upload(Request $request)
-    {
-        // $image = $request->file('image');
-     
-
-        // $imageFileName = time() . '.' . $image->getClientOriginalExtension();
-
-        $s3 = Storage::disk('s3');
-        // $filePath = '/events/' . $imageFileName;
-        // $s3->put($filePath, file_get_contents($image), 'public');
-
-        $url = $s3->url('1548788759.png');
-
-        dd($url);
-    }
-
     public function scheduleViewer(Request $request)
     {
 
         $file= public_path(). "/pdf/Schedule.pdf";
+
         $headers = array(
               'Content-Type: application/pdf',
             );
@@ -58,13 +28,24 @@ class HomeController extends Controller
         return response()->file($file, $headers);
        
     }
-    
+
+    /**
+     * Fest trailer View
+     *
+     * @return void
+     */
     public function newsView(Request $request)
     {
         return View('news');
     }
 
-
+   /**
+     * Registering a news
+     *
+     * @params title,body,date
+     * 
+     * @return  View
+     */
     public function newsRegister(Request $request)
     {
         if(!$request->body||!$request->title||!$request->date){
@@ -94,7 +75,13 @@ class HomeController extends Controller
 
         return back()->with('sucess','sucesss');
     }
-
+     /**
+     * Rendering an news View According the Slug
+     *
+     * @params slug
+     * 
+     * @return  View
+     */
     public function newsSlugView(Request $request,$slug)
     {
         $news=News::where('slug',$slug)->first();
