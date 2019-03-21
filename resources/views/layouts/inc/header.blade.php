@@ -26,6 +26,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/schedule') }}">Schedule</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('/results') }}">Results</a>
+        </li>
           <!--<li class="nav-item">
           <a class="nav-link" href="{{ url('/news') }}">News</a>
         </li>-->
@@ -39,6 +42,10 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('student') }}">Student Registration</a>
             <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('events/register') }}">Event Registration</a> 
+            <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('payment/stripe') }}">Payment</a> 
+            @if(Auth::user()->payment == 1)
+            <a class="dropdown-item" style="letter-spacing: 1px;" href="{{ url('/invoice') }}">Invoice</a> 
+            @endif
             <a class="dropdown-item" href="{{ url('logout') }}" >Logout</a>
           </div>
         </li>

@@ -13,6 +13,16 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExportController extends Controller
 {
+
+
+    /**
+     * Creating an Excel Sheet For Each Event
+     * it  will include details of the Events That Registered For the College
+     * 
+     * @Params eventid
+     * 
+     * @return Excel Sheel
+     */
     public function event_details($id) 
     {
         $event=Events::findOrFail($id);
@@ -21,8 +31,6 @@ class ExportController extends Controller
 
         $eventstudent=EventStudent::where('event_id',$event->id)->get();
 
-        // $count=count($event->eventstudent);
-
         $count=$eventstudent->count();
 
         $students=[];
@@ -30,26 +38,24 @@ class ExportController extends Controller
         $j=0;
         for( $i=0; $i<$count; $i++ )
         {   
-            // dd($event->studentDetails[$i]->student_id);
+
             $s=Student::findOrFail($event->studentDetails[$i]->student_id);
-            // dd($s);
+
             if(!empty($s) > 0){
-                // dd($s);
+    
                 $students[$j]=$s;
+
                 $j++;
 
             }
             
         }
-        // dd($students);
-
 
         $data=[
             'students' => $students,
             'event'=>$event,
         ];
-        // dd($data['students']);
-        // return view('exports.event-details',compact('data'));
+
         Excel::create($filename, function($excel) use($filename, $sheetname, $data){
             $myData = $data;
             $excel->sheet($sheetname, function($sheet) use($myData){
@@ -59,6 +65,14 @@ class ExportController extends Controller
         
 
     }
+     /**
+     * Creating an Excel Sheet For Each College 
+     * it  will include details of the students and their registered event details
+     * 
+     * @Params collegeid
+     * 
+     * @return Excel Sheel
+     */
     public function registration_form($id)
     {
         $students=Student::where('college_id',$id)->get();
@@ -91,8 +105,6 @@ class ExportController extends Controller
             
         ];
 
-        // return view('exports.registration-form',compact('data'));
-
         Excel::create($filename, function($excel) use($filename, $sheetname, $data){
             $myData = $data;
             $excel->sheet($sheetname, function($sheet) use($myData){
@@ -103,30 +115,4 @@ class ExportController extends Controller
 
     }
 
-    // public function student($id)
-    // {
-    
-    //     $students=Student::where('college_id',$id)->get();
-    //     $college=College::where('user_id',$id)->first();
-    //     $events=Events::all();
-
-        
-    //     // foreach($students as $student){
-
-    //     //     $subresult =collect();
-            
-    //     //     $eventstudents=EventStudent::where('student_id',$student->id)->get();
-
-    //     //     foreach($eventstudents as $eventstudent){
-
-    //     //         $subresult->push($eventstudent->event_id);
-
-    //     //     }
-            
-    //     //     $student->events=$subresult;
-    //     // }
-    //     // return view('exports.registration-form',compact('students'));
-
-        
-    // }
 }

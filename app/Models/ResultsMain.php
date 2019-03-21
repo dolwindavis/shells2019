@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ResultsMain extends Model
 {
     
-    protected $table='results_main';
+    protected $table='result_main';
 
     public $timestamps = true;
 

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Shells2k19'),
 
     /*
     |--------------------------------------------------------------------------
@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -176,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         NotificationChannels\OneSignal\OneSignalServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -227,6 +229,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'OneSignal'=>NotificationChannels\OneSignal\OneSignalServiceProvider::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

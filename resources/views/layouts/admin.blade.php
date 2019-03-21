@@ -9,11 +9,19 @@
   <title>@yield('title','SHELLS2k19')</title>
   <!-- Favicon -->
   <link href="{{asset('img/brand/favicon.png')}}" rel="icon" type="image/png">
+
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="{{asset('vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
+
   <!-- Argon CSS -->
   <link type="text/css" href="{{asset('css/argon.css?v=1.0.0')}}" rel="stylesheet">
 </head>
@@ -68,6 +76,10 @@
   <!-- Core -->
   <script src="{{asset('vendor/jquery/dist/jquery.min.js')}}"></script>
   <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}""></script>
+ 
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
   <!-- Argon JS -->
   <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
 </body>

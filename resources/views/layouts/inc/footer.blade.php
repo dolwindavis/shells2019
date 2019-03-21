@@ -4,10 +4,10 @@
         <div class="col-md-3 text-left border-light  " style="font-size: 12px;height:200px !important">
           <a href="/" class="d-block p-2 text-light" style="font-size: 12px;"> Home</a>
           <a href="/events" class="d-block p-2 text-light" style="font-size: 12px;">Events</a>
+          <a href="/results" class="d-block p-2 text-light" style="font-size: 12px;"> Results</a>
           <a href="/contact" class="d-block p-2 text-light" style="font-size: 12px;"> Contact Us</a>
           <a href="/register" class="d-block p-2 text-light" style="font-size: 12px;"> Register</a>
           <a href="/login" class="d-block p-2 text-light" style="font-size: 12px;">Login</a>
-          <a href="/schedule" class="d-block p-2 text-light" style="font-size: 12px;">Schedule</a>
           <!--<a href="/rules" class="d-block p-2 text-light" style="font-size: 12px;">Rules</a>-->
         </div>
         <div class="col-md-6" style="height:200px !important">

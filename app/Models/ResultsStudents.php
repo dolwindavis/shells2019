@@ -8,7 +8,7 @@ class ResultsStudents extends Model
 {
     
     
-    protected $table='results_students';
+    protected $table='result_students';
 
     public $timestamps = true;
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\User;
 use App\Models\Events;
 use App\Helpers\Helper;
@@ -14,24 +15,77 @@ use Illuminate\Support\Facades\Auth;
 
 class ViewController extends Controller
 {
+    /**
+    * Rendering Home View
+    *
+    * @params 
+    * 
+    * @return  View with news
+    */
     function homeView() {
-        return view('home');
+
+        //checking for the admin or user login
+        if(Auth::user() &&  Auth::user()->username == 'admin'){
+
+           return  redirect('/admin/home');
+
+        }
+
+        $news = News::latest()->get();
+        
+        return view('home',compact('news'));
     }
 
+    /**
+    * Rendering Login View
+    *
+    * @params 
+    * 
+    * @return  View with news
+    */
     function loginView() {
+
         return view('login');
     }
 
+
+     /**
+    * Rendering register View
+    *
+    * @params 
+    * 
+    * @return  View with news
+    */
     function registerView() {
+
         return view('register');
     }
 
-    function studentlistView() {
-        
-        
-        return view('studentlist');
+
+     /**
+    * Rendering Student Details for a college View
+    *
+    * @params 
+    * 
+    * @return  View with news
+    */
+    public function studentDetails(Request $request)
+    {
+        $user=Auth::user();
+
+        $students=$user->student()->get();
+
+        return view('studentlist',compact('students'));
+
     }
 
+    /**
+    * Rendering Events View
+    *
+    * @params 
+    * 
+    * @return  View 
+    */
     public function eventsView(Request $request)
     {
         $events = Events::all();
@@ -39,7 +93,14 @@ class ViewController extends Controller
 
 
     }
-
+ 
+     /**
+    * Add Students For the College view
+    *
+    * @params 
+    * 
+    * @return  View 
+    */
     function studentAddView() {
 
         $student =new Student();
@@ -54,69 +115,35 @@ class ViewController extends Controller
         return view('studentadd',compact('student'));
     }
 
+     /**
+    * Event Registered Detials For A college
+    *
+    * @params 
+    * 
+    * @return  View 
+    */
     function eventlistView() {
 
-        // // $events=Events::select('name','id')->get();
         $user=Auth::user();
 
         $helper = new Helper;
 
         $events=$helper->eventListSort();
 
-//         $eventstudent =DB::table('eventstudent')
-//                         ->join('students','eventstudent.student_id','=','students.id')
-//                         ->join('events','eventstudent.event_id','=','events.id')
-//                         ->select('events.id as eid','events.*','students.name as sname','students.id as sid','eventstudent.*')->get();
-
-//         $result=collect();
-
-//         foreach($eventstudent as $es){
-
-//             $subresult=collect();
-
-//             $subresult->eventname=$es->name;
-//             $subresult->eventlogo=$es->logo;
-//             $subresult->eventid=$es->eid;
-//             $subresult->eventinfo=$es->info;
-//             $groupid=$es->group_id;
-//             if($es->groupevent == '1'){
-                
-//                 $students =collect();
-//                 foreach ($eventstudent as $key => $student) {
-
-//                     $substudents=collect();
-
-//                     if($student->group_id == $groupid){
-
-//                         $substudents->name=$student->sname;
-//                         $substudents->id=$student->sid;
-
-//                         $students->push($substudents);
-
-//                         $eventstudent->pull($key);
-//                     }
-
-//                 }
-//                 $subresult->students=$students;
-//             }
-//             else{
-
-//                $subresult->studentname=$es->sname;
-//                $subresult->studentid=$es->id;
-
-//             }
-//             $result->push($subresult);
-//         }
-//         // dd($result);
-//         return view('eventlist',compact('events'));
         $results=$helper->eventRegisterDetails();
 
         return view('eventlist',compact('events','results'));
     }
 
+
+     /**
+    *Event details View With Slug 
+    *
+    * @params 
+    * 
+    * @return  View 
+    */
     function eventdetailsView(Request $request,$slug) {
-
-
 
         $events=Events::where('slug',$slug)->get();
 
@@ -128,6 +155,13 @@ class ViewController extends Controller
         return view('events',compact('events'));
     }
 
+     /**
+    * Edit Students For the College view with student details
+    *
+    * @params 
+    * 
+    * @return  View 
+    */
 
     public function editStudentView($studentid)
     {
@@ -135,22 +169,26 @@ class ViewController extends Controller
 
         return view('studentadd',compact('student'));
     }
-    //text function
-    public function addEvent()
-    {
-        return view('student_event');
-    }
 
+
+     /**
+    * College Report detail View in Admin Panel
+    *
+    * @params 
+    * 
+    * @return  View 
+    */
     public function college_reports()
     {
         $colleges=College::all();
 
         foreach($colleges as $college){
+
             $student=$college->studentDetails();
 
             $count =$student->count();
 
-            $coding =EventStudent::where([['college_id',$college->id],['event_id','3']])->count();
+            $coding =EventStudent::where([['college_id',$college->user_id],['event_id','3']])->count();
 
             $college->studentfee=$count*120;
 
@@ -158,26 +196,44 @@ class ViewController extends Controller
 
             $college->totalfee=$college->studentfee+$college->codingfee;
 
+            $college->payment=User::where('id',$college->user_id)->value('payment');
 
         }
-
-
         return view('exports.college-reports',compact('colleges'));
     }
 
+
+    /**
+    * Event Report detail View in Admin Panel
+    *
+    * @params 
+    * 
+    * @return  View 
+    */
     public function event_reports()
     {
         $events=Events::all();
+
         return view('exports.event-reports',compact('events'));
     }
 
+
+     /**
+    * Delete a College if payment is not done
+    *
+    * @params 
+    * 
+    * @return  View 
+    */
     public function collegeDelete(Request $request){
 
         $collegeid=$request->collegeid;
+        
 
         DB::beginTransaction();
 
         try{
+
             $eventstudent=EventStudent::where('college_id',$collegeid)->delete();
 
             $student=Student::where('college_id',$collegeid)->delete();
@@ -185,6 +241,7 @@ class ViewController extends Controller
             $college=College::where('user_id',$collegeid)->delete();
 
             $user=User::where('id',$collegeid)->delete();
+            
             DB::commit();
         }
         catch(Exception $e){
@@ -199,5 +256,24 @@ class ViewController extends Controller
 
     }
 
+     /**
+    * Manual Payment Through Admin Panel
+    *
+    * @params 
+    * 
+    * @return  View 
+    */
+    public function adminPayment(Request $request)
+    {
+        $userid=$request->userid;
+
+        $user=User::where('id',$userid)->first();
+
+        $user->payment=1;
+
+        $user->save();
+
+        return back()->with('sucess','sucess');
+    }
 
 }

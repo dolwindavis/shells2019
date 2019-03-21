@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResultMainTable extends Migration
+class CreateTablePayment extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateResultMainTable extends Migration
      */
     public function up()
     {
-        Schema::create('result_main', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('event_id');
-            $table->integer('no');
-            $table->string('eventname');
-            $table->string('round');
+            $table->string('tokenid');
+            $table->string('chargeid');
+            $table->string('userid');
+            $table->string('amount');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateResultMainTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('result_main');
+        Schema::dropIfExists('payment');
     }
 }

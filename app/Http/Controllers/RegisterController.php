@@ -20,8 +20,14 @@ use App\Http\Requests\StudentRegisterRequest;
 
 class RegisterController extends Controller
 {
-    
-    //Registration of the college
+     /**
+     * Registering a college
+     *
+     * request is validated in a CollegeRegsiterRequest
+     * @params CollegeRegisterRequest request
+     * 
+     * @return  View
+     */
     public function registerCollege(CollegeRegisterRequest $request)
     {   
         
@@ -29,8 +35,6 @@ class RegisterController extends Controller
 
         $validated = $request->validated();
 
- 
-        
         //beginning a Database transaction
         DB::beginTransaction();
 
@@ -65,8 +69,14 @@ class RegisterController extends Controller
         
     }
 
-
-//Registration of the students
+    /**
+     * Registration of the students
+     *
+     * request is validated in a StudentRegsiterRequest
+     * @params StudentRegisterRequest request
+     * 
+     * @return  View
+     */
     public function registerStudent(StudentRegisterRequest $request)
     {
 
@@ -80,6 +90,7 @@ class RegisterController extends Controller
 
         $count=Student::where('college_id',$user->id)->get();
 
+        //Checking the Count of student reached 12 or not
         if($count->count() >= 12){
 
             session()->flash('count','Success');
@@ -93,9 +104,11 @@ class RegisterController extends Controller
 
             foreach($students as $key=>$student){
 
+                //checking for the repetation of the regster number for a college
                 if($student->reg_no == $request->reg_no){
 
                     session()->flash('regno','Success');
+
                     return redirect('/student/register');
                 }
 
@@ -118,13 +131,18 @@ class RegisterController extends Controller
 
         }
 
-
-
         return redirect('/student');
 
     }
 
-//edit a student details
+    /**
+     * Updating the student Details
+     *
+     * request is validated in a StudentRegsiterRequest
+     * @params StudentRegisterRequest request
+     * 
+     * @return  View
+     */
     function studentUpdate(StudentRegisterRequest $request,$studentid)
     {
         
@@ -141,29 +159,38 @@ class RegisterController extends Controller
 
             foreach($students as $key=>$s){
 
+                 //checking for the repetation of the regster number for a college
                 if($s->reg_no == $request->reg_no && $s->reg_no != $student->reg_no ){
 
                     session()->flash('regno','Success');
 
                     return back();
-                    // return redirect('/student/register');
+
                 }
 
             }
 
         }
 
+        //updating the students
         $student->updateStudent($request);
 
         return redirect('/student');
     }
 
-//delete a student
+    /**
+    * Deleting a Student
+    *
+    * @params Request request
+    * 
+    * @return  View
+    */
     function studentDelete(Request $request,$studentid)
     {
 
         $student=EventStudent::where('student_id',$studentid)->get();
 
+        //checking whether a student is registered for the event or not
         if($student->isNotEmpty()){
 
             session()->flash('deletefailure','Success');
@@ -183,9 +210,17 @@ class RegisterController extends Controller
         session()->flash('delete','Success');
         return redirect('/student');
     }
-    
+    /**
+    * Adding events to the System by the organisers
+    * It uses Aws for storing the Images
+    * 
+    * @params EventRergsterRequest request
+    * 
+    * @return  View
+    */
     function eventRegister(EventRegisterRequest $request)
-    {
+    {   
+        //url for the aws bucket it uses storing the image url
         $url="https://s3.ap-south-1.amazonaws.com/shells2k19";
         
         // validation rules => EventRegisterRequest 
@@ -233,8 +268,10 @@ class RegisterController extends Controller
         //creating url for headimage
         $request->headimage=$url.$headnamePath;
 
+        //creating a slug for the event
         $request->slug=str_slug($request->name, '-');
 
+        //creating the events
         $event=new Events();
 
         $event->registerEvent($request);
@@ -243,23 +280,45 @@ class RegisterController extends Controller
 
     }
 
-
+    /**
+    * Sending the Email To the User
+    *We are using free gmail smtp serve rto sent email
+    *
+    * @params newuser,newcollege
+    * 
+    * @return  View
+    */
     function sendMail($newuser,$newcollege)
     {
         $mail=$newuser->email;
+
         $username=$newuser->username;
+
         $name=$newcollege->name;
+        //creating a mail instance for email 
         Mail::to($mail)->send(new RegisterMail($username,$name));
         
     }
-
+    /**
+    * Showing the error message in register college
+    *
+    * @params 
+    * 
+    * @return  View
+    */
     function errorRegisterView(Request $request){
 
         session()->flash('failed','Success');
         return redirect('register');
 
     }
-
+    /**
+    * Showing the error message in register Student
+    *
+    * @params 
+    * 
+    * @return  View
+    */
     function errorStudentView(Request $request){
 
         session()->flash('failed','Success');

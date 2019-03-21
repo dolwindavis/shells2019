@@ -16,6 +16,7 @@ class CreateResultStudentsTable extends Migration
         Schema::create('result_students', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('group_id');    
             $table->integer('result_main_id');
             $table->timestamps();
         });

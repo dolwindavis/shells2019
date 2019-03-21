@@ -3,14 +3,55 @@
 
 @section('content')
 
-@if (session('Sucess'))
-  <script>
+
+@if (session('sucess'))
+<script>
   Swal.fire(
   'News Added Successfully',
   '#GameOn!',
   'success'
 )
+</script>
+@elseif (session('result'))
+<script>
+  Swal.fire(
+  'Result Published Successfully',
+  '#GameOn!',
+  'success'
+)
+</script>
+@elseif(session('same'))
+  <script>
+  Swal.fire(
+  'No Duplication On Participants!',
+  '#GameOn!',
+  'error'
+)
   </script>
+@elseif(session('error'))
+<script>
+Swal.fire(
+'Something Went Wrong! Try Agains!',
+'#GameOn!',
+'error'
+)
+</script>
+@elseif(session('count'))
+  <script>
+  Swal.fire(
+  'Check Your Participants Count!',
+  '#GameOn!',
+  'error'
+)
+</script>
+@elseif(session('event'))
+  <script>
+  Swal.fire(
+  'Check Your Event Type!',
+  '#GameOn!',
+  'error'
+)
+</script>
 @endif
     <!-- Header -->
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8" style="padding-top: 5px;">
@@ -25,7 +66,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total Colleges</h5>
-                      <span class="h2 font-weight-bold mb-0">21</span>
+                      <span class="h2 font-weight-bold mb-0">{{$college}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -68,7 +109,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total Participants</h5>
-                      <span class="h2 font-weight-bold mb-0">128</span>
+                      <span class="h2 font-weight-bold mb-0">{{ $student }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -129,12 +170,11 @@
                   <div class="form-group col-md-6">
                     <label for="inputState">Event</label>
                     <select id="inputState" class="form-control" name="eventid">
-                    
-                      <option selected >Choose...</option>
-                     
-                      <option value="1"> DeepCoder </option>
-                      <option value="2"> Lens Bians </option>
-            
+                      @foreach($events as $event)
+                      <!--<option value="1"> DeepCoder </option>-->
+                      <option value="{{$event->id}}" selected> {{$event->name}} </option>
+
+                      @endforeach
                     </select>
                   </div>
 
@@ -204,9 +244,17 @@
                     </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="text" placeholder="Date" class="form-control" name="date"/>
+                              <div class="form-group">
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    </div>
+                                    <input class="form-control datepicker" placeholder="Select date" type="text" value="{{ date('d-m-Y')}}" name="date">
+                                </div>
                         </div>
+                        <!--<div class="form-group">
+                            <input type="text" placeholder="Date" class="form-control" name="date"/>
+                        </div>-->
                     </div> 
                     <div class="col-md-12">
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Markup" name="body"></textarea>              

@@ -55,14 +55,20 @@
       <div class="col-md-3  border" id="" style="max-height: 400px; overflow-y: scroll;">
         <h4 class="border-bottom border-primary mt-1">News</h4>
 
-
+        @foreach($news as $new)
+        <div class="news" style="border-bottom: solid 1px #ddd;">
+          <a href="{{ url('news/'.$new->slug) }}" style="text-decoration: none; color: #565656;">
+            <h4 style="font-family: Times New Roman; font-weight: 900; margin-bottom: 2px; line-height: 20px; margin-top: 2px;">{{$new->title}}</h4>
+            <p style="margin-top: -8px;">{{$new->date}}</p>
+          </a>
+        </div>
+        @endforeach
         <div class="news" style="border-bottom: solid 1px #ddd;">
           <a href="{{ url('news/trailer') }}" style="text-decoration: none; color: #565656;">
             <h4 style="font-family: Times New Roman; font-weight: 900; margin-bottom: 2px; line-height: 20px; margin-top: 2px;">SHELLS 2K19 TRAILER OUT</h4>
             <p style="margin-top: -8px;">25/2/2019</p>
           </a>
         </div>
-
 
       </div>
     </div>
